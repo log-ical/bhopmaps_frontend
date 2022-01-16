@@ -14,7 +14,7 @@ import {
     MenuDivider,
     Text,
     Image,
-    Avatar
+    Avatar,
 } from '@chakra-ui/react';
 import LogoDark from '../../../public/logo_dark.svg';
 import LogoLight from '../../../public/logo_light.svg';
@@ -56,10 +56,7 @@ const Header: React.FC<any> = ({ props: any }) => {
                 {session ? (
                     <Menu closeOnSelect>
                         <HStack>
-                        <Avatar
-                        name='Testuser'
-                                size='sm'
-                            />
+                            <Avatar name='Testuser' size='sm' />
                             <MenuButton
                                 size='sm'
                                 variant='ghost'
