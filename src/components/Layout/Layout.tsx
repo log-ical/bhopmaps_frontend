@@ -1,13 +1,13 @@
 import React from 'react';
 import {
     Container,
-    useColorMode,
     useColorModeValue,
     VStack,
 } from '@chakra-ui/react';
+import Header from './Header';
+import Footer from './Footer';
 
 const Layout: React.FC<any> = ({ children }) => {
-    const { colorMode, toggleColorMode } = useColorMode();
     const backgroundColor = useColorModeValue('white', '');
     return (
         <Container
@@ -19,9 +19,9 @@ const Layout: React.FC<any> = ({ children }) => {
             centerContent
         >
             <VStack flex={1} spacing={16} alignItems='stretch' w='full'>
-                {/* {header palceholder} */}
+                <Header/>
                 {children}
-                {/* {footer palceholder} */}
+                <Footer/>
             </VStack>
         </Container>
     );
