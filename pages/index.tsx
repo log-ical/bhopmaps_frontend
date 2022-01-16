@@ -21,13 +21,7 @@ const Home: NextPage = () => {
         setSearchByTitle(e.target.value);
     };
 
-    const handleDeleteInput = (e: any) => {
-        e.preventDefault();
-        setSearchByTitle('');
-    };
-
-    const [searchTextPlaceholder, setSearchTextPlaceholder] =
-        React.useState('Search Maps');
+    const searchTextPlaceholder = 'Search Maps';
     return (
         <>
             <Head>
