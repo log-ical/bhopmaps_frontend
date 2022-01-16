@@ -37,7 +37,7 @@ const Home: NextPage = () => {
                 />
                 <meta charSet='utf-8' />
                 <meta name='Description' content={description}></meta>
-                <title>khenzy.dev</title>
+                <title>Bhopmaps - CSS & CSGO</title>
             </Head>
             <HStack w='full'>
                 <InputGroup size='md'>
