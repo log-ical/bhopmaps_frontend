@@ -14,7 +14,7 @@ const Layout: React.FC<any> = ({ children }) => {
             display='flex'
             maxW='container.sm'
             bg={backgroundColor}
-            minH={{ base: 'auto', md: '100vh' }}
+            minH='100vh'
             px={{ base: 4, lg: 6 }}
             centerContent
         >

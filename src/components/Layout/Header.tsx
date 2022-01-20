@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
     HStack,
     useColorMode,
@@ -26,11 +26,26 @@ import { IoChevronDown, IoMoon, IoSunny } from 'react-icons/io5';
 import { AiFillPlusCircle, AiFillHome, AiOutlineLogout } from 'react-icons/ai';
 import { FaUserAlt } from 'react-icons/fa';
 import { IoMdSettings } from 'react-icons/io';
+import { UserContext, AUTH_URL } from 'src/api/UserContext';
 
 const Header: React.FC<any> = ({ props: any }) => {
     const { colorMode, toggleColorMode } = useColorMode();
-    const session = true;
+    const { user, setUser } = useContext(UserContext);
+    
+    const handleLogout = () => {
 
+        const authUrl = `${AUTH_URL}/logout`;
+        // send to server
+        fetch(authUrl, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        setUser(null);
+    };
     return (
         <HStack
             as='nav'
@@ -52,18 +67,22 @@ const Header: React.FC<any> = ({ props: any }) => {
                 </Link>
             </NextLink>
 
-            <HStack alignItems='center' spacing={{ base: 0, md: 4 }}>
-                {session ? (
+            <HStack alignItems='center' spacing={{ base: 2, md: 4 }}>
+                {user ? (
                     <Menu closeOnSelect>
                         <HStack>
-                            <Avatar name='Testuser' size='sm' />
+                            <Avatar
+                                src={user?.avatar}
+                                name={user?.username}
+                                size='md'
+                            />
                             <MenuButton
                                 size='sm'
                                 variant='ghost'
                                 as={Button}
                                 rightIcon={<IoChevronDown />}
                             >
-                                <Text>TestUser</Text>
+                                <Text>{user?.username}</Text>
                             </MenuButton>
                         </HStack>
 
@@ -95,8 +114,7 @@ const Header: React.FC<any> = ({ props: any }) => {
                                 <MenuItem
                                     icon={<AiOutlineLogout />}
                                     color='red.400'
-                                    onClick={() =>
-                                        console.log('Logout Btn clicked')
+                                    onClick={handleLogout
                                     }
                                 >
                                     Logout
@@ -105,7 +123,18 @@ const Header: React.FC<any> = ({ props: any }) => {
                         </MenuList>
                     </Menu>
                 ) : (
-                    <>Login Placeholder</>
+                    <>
+                        <NextLink href='/auth/login' passHref>
+                            <Button size='sm' variant='solid'>
+                                Login
+                            </Button>
+                        </NextLink>
+                        <NextLink href='/auth/register' passHref>
+                            <Button size='sm' variant='solid'>
+                                Register
+                            </Button>
+                        </NextLink>
+                    </>
                 )}
 
                 <IconButton
