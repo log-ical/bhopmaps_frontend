@@ -18,6 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 });
                 if (rawUser.status === 401) {
                     setUser(null);
+                    throw new Error('Unauthorized');
                 }
 
                 if (rawUser.status === 200) {

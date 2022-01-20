@@ -27,6 +27,7 @@ import { AiFillPlusCircle, AiFillHome, AiOutlineLogout } from 'react-icons/ai';
 import { FaUserAlt } from 'react-icons/fa';
 import { IoMdSettings } from 'react-icons/io';
 import { UserContext, API_URL } from 'src/api/UserContext';
+import Router from 'next/router';
 
 const Header: React.FC<any> = ({ props: any }) => {
     const { colorMode, toggleColorMode } = useColorMode();
@@ -45,6 +46,10 @@ const Header: React.FC<any> = ({ props: any }) => {
 
         setUser(null);
     };
+
+    const handleProfile = () => {
+        Router.push(`/user/${user?.username}`);
+    }
     return (
         <HStack
             as='nav'
@@ -100,10 +105,8 @@ const Header: React.FC<any> = ({ props: any }) => {
                             </MenuItem>
                             <MenuDivider />
                             <MenuGroup title='Account'>
-                                <MenuItem icon={<FaUserAlt />}>
-                                    <NextLink href='/' passHref>
+                                <MenuItem icon={<FaUserAlt />} onClick={handleProfile}>
                                         Profile
-                                    </NextLink>
                                 </MenuItem>
                                 <MenuItem icon={<IoMdSettings />}>
                                     <NextLink href='/' passHref>
