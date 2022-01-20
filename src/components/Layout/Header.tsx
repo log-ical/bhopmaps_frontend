@@ -31,9 +31,8 @@ import { UserContext, AUTH_URL } from 'src/api/UserContext';
 const Header: React.FC<any> = ({ props: any }) => {
     const { colorMode, toggleColorMode } = useColorMode();
     const { user, setUser } = useContext(UserContext);
-    
-    const handleLogout = () => {
 
+    const handleLogout = () => {
         const authUrl = `${AUTH_URL}/logout`;
         // send to server
         fetch(authUrl, {
@@ -114,8 +113,7 @@ const Header: React.FC<any> = ({ props: any }) => {
                                 <MenuItem
                                     icon={<AiOutlineLogout />}
                                     color='red.400'
-                                    onClick={handleLogout
-                                    }
+                                    onClick={handleLogout}
                                 >
                                     Logout
                                 </MenuItem>

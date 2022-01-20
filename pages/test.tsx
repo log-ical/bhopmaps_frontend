@@ -4,9 +4,7 @@ import { Text } from '@chakra-ui/react';
 
 const Test = () => {
     const { user } = useContext(UserContext);
-  return (
-    <Text>{user?.username}</Text>
-    )
+    return <Text>{user?.username}</Text>;
 };
 
 export default Test;

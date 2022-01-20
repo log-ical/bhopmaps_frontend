@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-    Container,
-    useColorModeValue,
-    VStack,
-} from '@chakra-ui/react';
+import { Container, useColorModeValue, VStack } from '@chakra-ui/react';
 import Header from './Header';
 import Footer from './Footer';
 
@@ -19,9 +15,9 @@ const Layout: React.FC<any> = ({ children }) => {
             centerContent
         >
             <VStack flex={1} spacing={16} alignItems='stretch' w='full'>
-                <Header/>
+                <Header />
                 {children}
-                <Footer/>
+                <Footer />
             </VStack>
         </Container>
     );
