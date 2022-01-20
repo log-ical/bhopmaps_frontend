@@ -41,8 +41,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         };
     }, [user, setUser]);
 
-    // Use
-
     return (
         <ChakraProvider theme={theme}>
             <UserContext.Provider value={userContext}>
