@@ -26,14 +26,14 @@ import { IoChevronDown, IoMoon, IoSunny } from 'react-icons/io5';
 import { AiFillPlusCircle, AiFillHome, AiOutlineLogout } from 'react-icons/ai';
 import { FaUserAlt } from 'react-icons/fa';
 import { IoMdSettings } from 'react-icons/io';
-import { UserContext, AUTH_URL } from 'src/api/UserContext';
+import { UserContext, API_URL } from 'src/api/UserContext';
 
 const Header: React.FC<any> = ({ props: any }) => {
     const { colorMode, toggleColorMode } = useColorMode();
     const { user, setUser } = useContext(UserContext);
 
     const handleLogout = () => {
-        const authUrl = `${AUTH_URL}/logout`;
+        const authUrl = `${API_URL}/logout`;
         // send to server
         fetch(authUrl, {
             method: 'POST',
@@ -58,8 +58,8 @@ const Header: React.FC<any> = ({ props: any }) => {
                         <NextImage
                             src={colorMode === 'light' ? LogoLight : LogoDark}
                             alt='Logo'
-                            width={48}
-                            height={48}
+                            width={32}
+                            height={32}
                         />
                         <Heading size='md'>MAPS</Heading>
                     </HStack>
@@ -73,7 +73,7 @@ const Header: React.FC<any> = ({ props: any }) => {
                             <Avatar
                                 src={user?.avatar}
                                 name={user?.username}
-                                size='md'
+                                size='sm'
                             />
                             <MenuButton
                                 size='sm'

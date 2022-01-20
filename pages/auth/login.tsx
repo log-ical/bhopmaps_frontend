@@ -14,7 +14,7 @@ import {
     AlertDescription,
 } from '@chakra-ui/react';
 import Router from 'next/router';
-import { AUTH_URL, UserContext } from 'src/api/UserContext';
+import { API_URL, UserContext } from 'src/api/UserContext';
 
 const Login = () => {
     const [username, setUsername] = React.useState('');
@@ -38,7 +38,7 @@ const Login = () => {
             }, 3000);
             return;
         }
-        const authUrl = `${AUTH_URL}/login`;
+        const authUrl = `${API_URL}/login`;
         // fetch from server
         const getToken = fetch(authUrl, {
             method: 'POST',
@@ -53,7 +53,7 @@ const Login = () => {
         });
 
         if ((await getToken).status === 201) {
-            const rawUser = await fetch(`${AUTH_URL}/user`, {
+            const rawUser = await fetch(`${API_URL}/user`, {
                 credentials: 'include',
             });
 

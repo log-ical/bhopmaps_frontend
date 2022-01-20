@@ -1,5 +1,4 @@
 import {
-    Container,
     FormControl,
     FormLabel,
     Heading,
@@ -14,6 +13,7 @@ import {
 } from '@chakra-ui/react';
 import Router from 'next/router';
 import React from 'react';
+import { API_URL } from 'src/api/UserContext';
 
 const Register: React.FC<any> = ({ props: any }) => {
     const [username, setUsername] = React.useState('');
@@ -42,7 +42,7 @@ const Register: React.FC<any> = ({ props: any }) => {
         }
 
         // Handle registering
-        const authUrl = `http://localhost:5000/api/register`;
+        const authUrl = `${API_URL}/register`;
         console.log('Sending request to:', authUrl);
         // send to server
         fetch(authUrl, {
