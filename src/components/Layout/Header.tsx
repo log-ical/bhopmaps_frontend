@@ -307,7 +307,7 @@ const Header: React.FC<any> = ({ props: any }) => {
                                         >
                                             Delete Account
                                         </Button>
-                                        
+
                                         <AlertDialog
                                             isOpen={isOpenDelete}
                                             leastDestructiveRef={cancelRef}

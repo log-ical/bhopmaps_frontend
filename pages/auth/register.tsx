@@ -112,7 +112,9 @@ const Register: React.FC<any> = ({ props: any }) => {
                                 Submit
                             </Button>
                             <HStack>
-                                <Text color='gray.500' fontWeight='bold'>Already have an account?</Text>
+                                <Text color='gray.500' fontWeight='bold'>
+                                    Already have an account?
+                                </Text>
                                 <Link
                                     color='blue.600'
                                     to='/auth/login'

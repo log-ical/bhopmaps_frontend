@@ -41,7 +41,11 @@ const Profile: React.FC<{ data: any }> = (props) => {
                     <VStack alignItems='flex-start'>
                         <Image
                             borderRadius={12}
-                            src={data.userData?.avatar ? data.userData?.avatar : config.defaultAvatar}
+                            src={
+                                data.userData?.avatar
+                                    ? data.userData?.avatar
+                                    : config.defaultAvatar
+                            }
                             boxSize={48}
                             alt='Avatar'
                             loading='eager'
