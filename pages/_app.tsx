@@ -1,11 +1,11 @@
 import type { AppProps } from 'next/app';
-import { ChakraProvider, Spinner } from '@chakra-ui/react';
+import { ChakraProvider, ScaleFade, Spinner } from '@chakra-ui/react';
 import theme from '@/src/theme/theme';
 import Layout from '@/src/components/Layout/Layout';
 import React, { useMemo } from 'react';
 import { API_URL, UserContext } from 'src/api/UserContext';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps, router }: AppProps) {
     const [user, setUser] = React.useState(null);
     const [fetchError, setFetchError] = React.useState('');
 
@@ -45,9 +45,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
         <ChakraProvider theme={theme}>
             <UserContext.Provider value={userContext}>
-                <Layout>
-                    <Component {...pageProps} />
-                </Layout>
+                <ScaleFade key={router.route} initialScale={0.9} in={true}>
+                    <Layout>
+                        <Component {...pageProps} />
+                    </Layout>
+                </ScaleFade>
             </UserContext.Provider>
         </ChakraProvider>
     );

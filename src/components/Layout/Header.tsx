@@ -106,7 +106,7 @@ const Header: React.FC<any> = ({ props: any }) => {
     };
 
     const handleNewMap = () => {
-        Router.push('/map/new');
+        Router.push('/map/upload');
     };
 
     const handleEditUser = () => {
@@ -198,10 +198,11 @@ const Header: React.FC<any> = ({ props: any }) => {
                                 >
                                     Home
                                 </MenuItem>
-                                <MenuItem icon={<AiFillPlusCircle />}>
-                                    <NextLink href='/' passHref>
-                                        New Map
-                                    </NextLink>
+                                <MenuItem
+                                    icon={<AiFillPlusCircle />}
+                                    onClick={handleNewMap}
+                                >
+                                    New Map
                                 </MenuItem>
                                 <MenuDivider />
                                 <MenuGroup title='Account'>
