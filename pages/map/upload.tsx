@@ -37,12 +37,22 @@ const Upload = () => {
         formData.append('thumbnail', thumbnail);
         formData.append('file', fileInput.current.files![0]);
         formData.append('description', description);
+
         try {
             fetch(`${API_URL}/map/new`, {
                 method: 'POST',
                 body: formData,
                 credentials: 'include',
             }).then((res) => {
+                if (description.length > 500) {
+                    setError('Description must be less than 500 characters');
+                    setSubmitting(false);
+                    setTimeout(() => {
+                        setError('');
+                    }, 2000);
+
+                    return;
+                }
                 if (res.status === 400) {
                     setError(res.statusText);
                     setSubmitting(false);
@@ -106,7 +116,12 @@ const Upload = () => {
                             onChange={(e) => setDescription(e.target.value)}
                             size='sm'
                             resize='vertical'
+                            height={300}
+                            maxHeight={400}
                         />
+                        <Text fontSize='sm' color='gray.500'>
+                            {description.length} / 500{' '}
+                        </Text>
 
                         <FormLabel htmlFor='file'>Choose file</FormLabel>
                         <Input
@@ -114,6 +129,7 @@ const Upload = () => {
                             type='file'
                             ref={fileInput}
                             variant='unstyled'
+                            accept='.zip'
                         />
                         {submitting ? (
                             <Spinner />

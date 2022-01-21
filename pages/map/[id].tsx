@@ -17,6 +17,8 @@ import { useColorMode } from '@chakra-ui/react';
 import darkTheme from 'react-syntax-highlighter/dist/esm/styles/prism/dracula';
 import lightTheme from 'react-syntax-highlighter/dist/esm/styles/prism/base16-ateliersulphurpool.light';
 import ReactMarkdown from 'react-markdown';
+import NextLink from 'next/link';
+import { createDate } from 'src/utils/createDate';
 
 const Map: React.FC<{ data: any }> = ({ data }) => {
     const { map } = data;
@@ -51,14 +53,24 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
             {data.statusCode != 400 ? (
                 <VStack spacing={8} alignItems='flex-start'>
                     <VStack alignItems='flex-start'>
-                        <Heading>{map.mapName}</Heading>
                         <HStack>
+                            <Heading>{map.mapName}</Heading>
+                            <NextLink href='/' passHref>
+                                <Button p={2} size='sm' variant='solid'>
+                                    Back
+                                </Button>
+                            </NextLink>
+                        </HStack>
+                        <HStack>
+                            <Text color='gray.500'>Published on</Text>
+                            <Text color='gray.500' fontWeight='bold'>{createDate(map.createdAt)}</Text>
                             <Text color='gray.500'>by</Text>
-                            <Link color='blue.600' href={`/user/${map.author}`}>
+                            <Link fontWeight='bold' color='blue.600' href={`/user/${map.author}`}>
                                 {' '}
                                 {map.author}
                             </Link>
                         </HStack>
+
                         <Image
                             src={map.thumbnail}
                             alt='Map thumbnail'

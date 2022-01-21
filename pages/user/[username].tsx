@@ -15,6 +15,7 @@ import {
     Stack,
     List,
     ListItem,
+    Button,
 } from '@chakra-ui/react';
 import { API_URL, UserContext } from 'src/api/UserContext';
 import { GetServerSideProps } from 'next';
@@ -22,6 +23,7 @@ import fetch from 'node-fetch';
 import { HiOutlineSearch } from 'react-icons/hi';
 import config from '../../config.json';
 import NextLink from 'next/link';
+import { createDate } from 'src/utils/createDate';
 
 type Map = {
     id: string;
@@ -50,16 +52,6 @@ const Profile: React.FC<{ data: any; maps: any }> = ({ data, maps }) => {
     const hoverBg = useColorModeValue('gray.200', 'gray.700');
     const { colorMode, toggleColorMode } = useColorMode();
 
-    const createDate = (date: Date) => {
-        const dateObj = new Date(date).toLocaleDateString('en-US', {
-            weekday: 'short',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-        });
-
-        return dateObj;
-    };
     // Filtering
     const [searchByTitle, setSearchByTitle] = React.useState('');
 
@@ -91,6 +83,17 @@ const Profile: React.FC<{ data: any; maps: any }> = ({ data, maps }) => {
                                     {' '}
                                     {joined}
                                 </Text>
+                            </HStack>
+                            <HStack>
+                                <NextLink href='/' passHref>
+                                    <Button
+                                        p={2}
+                                        size='sm'
+                                        variant='solid'
+                                    >
+                                        Back
+                                    </Button>
+                                </NextLink>
                             </HStack>
                         </VStack>
                         <Divider />
