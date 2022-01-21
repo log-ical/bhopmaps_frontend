@@ -14,7 +14,7 @@ const Home: NextPage = () => {
     const description =
         'bhopmaps.com is a platform for CSS & CSGO bunnyhop maps.';
 
-    // Multiple Filtering
+    // Filtering
     const [searchByTitle, setSearchByTitle] = React.useState('');
     const handleSearchByTitle = (e: any) => {
         e.preventDefault();

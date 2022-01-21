@@ -12,6 +12,8 @@ import {
     AlertIcon,
     AlertTitle,
     AlertDescription,
+    HStack,
+    Link,
 } from '@chakra-ui/react';
 import Router from 'next/router';
 import { API_URL, UserContext } from 'src/api/UserContext';
@@ -67,7 +69,6 @@ const Login = () => {
                 }, 3000);
                 return;
             } else {
-                console.log('userData', userData);
                 await setUser(userData);
                 setLoading(false);
                 Router.push('/');
@@ -84,8 +85,8 @@ const Login = () => {
         <>
             <VStack spacing={4}>
                 <VStack>
-                    <Heading>Welcome Back</Heading>
-                    <Text>Please enter your details</Text>
+                    <Heading>WELCOME BACK</Heading>
+                    <Text color='gray.500'>Please enter your details</Text>
                 </VStack>
 
                 {error && (
@@ -125,9 +126,30 @@ const Login = () => {
                                 <AlertTitle>Submitting...</AlertTitle>
                             </Alert>
                         ) : (
-                            <Button type='submit' onClick={handleLogin}>
-                                Submit
-                            </Button>
+                            <HStack
+                                display='flex'
+                                justifyContent='space-between'
+                                width='stretch'
+                            >
+                                <Button
+                                    colorScheme='blue'
+                                    type='submit'
+                                    onClick={handleLogin}
+                                >
+                                    Submit
+                                </Button>
+                                <HStack>
+                                    <Text color='gray.500' fontWeight='bold'>
+                                        Dont have an account?
+                                    </Text>
+                                    <Link
+                                        color='blue.600'
+                                        href='/auth/register'
+                                    >
+                                        Register now!
+                                    </Link>
+                                </HStack>
+                            </HStack>
                         )}
                     </VStack>
                 </FormControl>

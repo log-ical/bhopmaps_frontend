@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app';
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, Spinner } from '@chakra-ui/react';
 import theme from '@/src/theme/theme';
 import Layout from '@/src/components/Layout/Layout';
 import React, { useMemo } from 'react';

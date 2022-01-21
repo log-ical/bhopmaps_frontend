@@ -10,6 +10,8 @@ import {
     AlertIcon,
     AlertTitle,
     AlertDescription,
+    HStack,
+    Link,
 } from '@chakra-ui/react';
 import Router from 'next/router';
 import React from 'react';
@@ -66,7 +68,7 @@ const Register: React.FC<any> = ({ props: any }) => {
     return (
         <>
             <VStack spacing={4}>
-                <Heading>Register an account</Heading>
+                <Heading>REGISTER AN ACCOUNT</Heading>
                 {error && (
                     <Alert status='error' rounded='md'>
                         <AlertIcon />
@@ -97,9 +99,30 @@ const Register: React.FC<any> = ({ props: any }) => {
                                 setPassword(e.target.value);
                             }}
                         />
-                        <Button type='submit' onClick={handleRegister}>
-                            Submit
-                        </Button>
+                        <HStack
+                            display='flex'
+                            justifyContent='space-between'
+                            width='stretch'
+                        >
+                            <Button
+                                colorScheme='blue'
+                                type='submit'
+                                onClick={handleRegister}
+                            >
+                                Submit
+                            </Button>
+                            <HStack>
+                                <Text color='gray.500' fontWeight='bold'>Already have an account?</Text>
+                                <Link
+                                    color='blue.600'
+                                    to='/auth/login'
+                                    href='/auth/login'
+                                >
+                                    Click here
+                                </Link>
+                            </HStack>
+                        </HStack>
+
                         {success && (
                             <Alert
                                 status='success'

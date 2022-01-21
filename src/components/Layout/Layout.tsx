@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, useColorModeValue, VStack } from '@chakra-ui/react';
 import Header from './Header';
 import Footer from './Footer';
+import ScrollButton from '../ScrollToTop';
 
 const Layout: React.FC<any> = ({ children }) => {
     const backgroundColor = useColorModeValue('white', '');
@@ -19,6 +20,7 @@ const Layout: React.FC<any> = ({ children }) => {
                 {children}
                 <Footer />
             </VStack>
+            <ScrollButton />
         </Container>
     );
 };
