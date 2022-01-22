@@ -103,91 +103,104 @@ const Profile: React.FC<{ data: any; maps: any }> = ({ data, maps }) => {
                             </InputGroup>
                         </HStack>
                     </VStack>
-                    <List spacing={6}>
-                        {maps
-                            .filter((maps: any) =>
-                                maps.mapName
-                                    .toLowerCase()
-                                    .includes(searchByTitle.toLowerCase())
-                            )
-                            .sort((a: any, b: any) => {
-                                const aDate = new Date(a.createdAt);
-                                const bDate = new Date(b.createdAt);
-                                return bDate.getTime() - aDate.getTime();
-                            })
-                            .map((map: Map) => (
-                                <>
-                                    <ListItem key={map.id}>
-                                        <NextLink href={`/map/${map.id}`}>
-                                            <VStack
-                                                bg={cardBackground}
-                                                w='full'
-                                                p={{ base: 4, md: 6 }}
-                                                rounded='md'
-                                                alignItems='stretch'
-                                                transitionProperty='all'
-                                                transitionDuration='slow'
-                                                transitionTimingFunction='ease-out'
-                                                _hover={{
-                                                    bg: hoverBg,
-                                                    transform:
-                                                        'scale(1.025, 1.025)',
-                                                }}
-                                                cursor='pointer'
-                                            >
-                                                <Stack
+                    {maps.length > 0 ? (
+                        <List spacing={6}>
+                            {maps
+                                .filter((maps: any) =>
+                                    maps.mapName
+                                        .toLowerCase()
+                                        .includes(searchByTitle.toLowerCase())
+                                )
+                                .sort((a: any, b: any) => {
+                                    const aDate = new Date(a.createdAt);
+                                    const bDate = new Date(b.createdAt);
+                                    return bDate.getTime() - aDate.getTime();
+                                })
+                                .map((map: Map) => (
+                                    <>
+                                        <ListItem key={map.id}>
+                                            <NextLink href={`/map/${map.id}`}>
+                                                <VStack
+                                                    bg={cardBackground}
                                                     w='full'
-                                                    justifyContent='space-between'
-                                                    direction={{
-                                                        base: 'column',
-                                                        md: 'row',
+                                                    p={{ base: 4, md: 6 }}
+                                                    rounded='md'
+                                                    alignItems='stretch'
+                                                    transitionProperty='all'
+                                                    transitionDuration='slow'
+                                                    transitionTimingFunction='ease-out'
+                                                    _hover={{
+                                                        bg: hoverBg,
+                                                        transform:
+                                                            'scale(1.025, 1.025)',
                                                     }}
+                                                    cursor='pointer'
                                                 >
-                                                    <HStack
+                                                    <Stack
+                                                        w='full'
                                                         justifyContent='space-between'
-                                                        width='stretch'
+                                                        direction={{
+                                                            base: 'column',
+                                                            md: 'row',
+                                                        }}
                                                     >
-                                                        <VStack alignItems='flex-start'>
-                                                            <Heading
-                                                                size='md'
-                                                                color={
-                                                                    colorMode ===
-                                                                    'light'
-                                                                        ? 'gray.700'
-                                                                        : 'white'
-                                                                }
-                                                            >
-                                                                {map.mapName}
-                                                            </Heading>
-                                                            <Text color='gray.500'>
-                                                                by {map.author}
-                                                            </Text>
-                                                        </VStack>
+                                                        <HStack
+                                                            justifyContent='space-between'
+                                                            width='stretch'
+                                                        >
+                                                            <VStack alignItems='flex-start'>
+                                                                <Heading
+                                                                    size='md'
+                                                                    color={
+                                                                        colorMode ===
+                                                                        'light'
+                                                                            ? 'gray.700'
+                                                                            : 'white'
+                                                                    }
+                                                                >
+                                                                    {
+                                                                        map.mapName
+                                                                    }
+                                                                </Heading>
+                                                                <Text color='gray.500'>
+                                                                    by{' '}
+                                                                    {map.author}
+                                                                </Text>
+                                                            </VStack>
 
-                                                        <VStack alignItems='flex-end'>
-                                                            <Image
-                                                                src={
-                                                                    map.thumbnail
-                                                                }
-                                                                alt='Map thumbnail'
-                                                                rounded='md'
-                                                                width={20}
-                                                            />
+                                                            <VStack alignItems='flex-end'>
+                                                                <Image
+                                                                    src={
+                                                                        map.thumbnail
+                                                                    }
+                                                                    alt='Map thumbnail'
+                                                                    rounded='md'
+                                                                    width={20}
+                                                                />
 
-                                                            <Text>
-                                                                {createDate(
-                                                                    map.createdAt
-                                                                )}
-                                                            </Text>
-                                                        </VStack>
-                                                    </HStack>
-                                                </Stack>
-                                            </VStack>
-                                        </NextLink>
-                                    </ListItem>
-                                </>
-                            ))}
-                    </List>
+                                                                <Text>
+                                                                    {createDate(
+                                                                        map.createdAt
+                                                                    )}
+                                                                </Text>
+                                                            </VStack>
+                                                        </HStack>
+                                                    </Stack>
+                                                </VStack>
+                                            </NextLink>
+                                        </ListItem>
+                                    </>
+                                ))}
+                        </List>
+                    ) : (
+                        <Text
+                            color='gray.500'
+                            justifyContent='center'
+                            width='stretch'
+                        >
+                            This user has no maps uploaded
+                        </Text>
+                    )}
                 </>
             ) : (
                 <Heading size='md'>{data.message}</Heading>
