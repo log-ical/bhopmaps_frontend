@@ -80,8 +80,8 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
                         <Image
                             src={map.thumbnail}
                             alt='Map thumbnail'
-                            width={80}
-                            rounded='md'
+                            width={120}
+                            rounded='lg'
                         />
                     </VStack>
                     <Divider />

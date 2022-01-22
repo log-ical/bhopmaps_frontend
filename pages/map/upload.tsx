@@ -153,7 +153,11 @@ const Upload = () => {
                         )}
 
                         {success && (
-                            <Alert variant='subtle' status='success' rounded='md'>
+                            <Alert
+                                variant='subtle'
+                                status='success'
+                                rounded='md'
+                            >
                                 <AlertIcon />
                                 <AlertTitle>Success</AlertTitle>
                                 Succesfully uploaded map!

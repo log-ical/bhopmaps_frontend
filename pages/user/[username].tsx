@@ -17,7 +17,7 @@ import {
     ListItem,
     Button,
 } from '@chakra-ui/react';
-import { API_URL, UserContext } from 'src/api/UserContext';
+import { API_URL } from 'src/api/UserContext';
 import { GetServerSideProps } from 'next';
 import fetch from 'node-fetch';
 import { HiOutlineSearch } from 'react-icons/hi';
