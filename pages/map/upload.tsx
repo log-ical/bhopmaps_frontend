@@ -132,18 +132,14 @@ const Upload = () => {
                             variant='unstyled'
                             accept='.zip'
                         />
-                        {submitting ? (
-                            <Spinner />
-                        ) : (
-                            <Button
-                                type='submit'
-                                colorScheme='blue'
-                                onClick={handleSubmit}
-                            >
-                                Submit
-                            </Button>
-                        )}
-
+                        <Button
+                            isLoading={submitting}
+                            type='submit'
+                            colorScheme='blue'
+                            onClick={handleSubmit}
+                        >
+                            Submit
+                        </Button>
                         {error && (
                             <Alert variant='subtle' status='error' rounded='md'>
                                 <AlertIcon />

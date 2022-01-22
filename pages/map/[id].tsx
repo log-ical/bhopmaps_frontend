@@ -10,8 +10,8 @@ import {
     HStack,
 } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
-import React from 'react';
-import { API_URL } from 'src/api/UserContext';
+import React, { useContext } from 'react';
+import { API_URL, UserContext } from 'src/api/UserContext';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { useColorMode } from '@chakra-ui/react';
 import darkTheme from 'react-syntax-highlighter/dist/esm/styles/prism/dracula';
@@ -19,10 +19,13 @@ import lightTheme from 'react-syntax-highlighter/dist/esm/styles/prism/base16-at
 import ReactMarkdown from 'react-markdown';
 import NextLink from 'next/link';
 import { createDate } from 'src/utils/createDate';
+import Router from 'next/router';
 
 const Map: React.FC<{ data: any }> = ({ data }) => {
     const { map } = data;
     const { colorMode, toggleColorMode } = useColorMode();
+    const { user } = useContext(UserContext);
+    const [isloading, setLoading] = React.useState(false);
 
     const renderers = {
         code: (props: any) => {
@@ -46,6 +49,24 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
     };
     const handleDownload = async () => {
         // TODO: Download the map
+    };
+
+    const handleDelete = async () => {
+        setLoading(true);
+        const res = await fetch(`${API_URL}/map/${map.id}/delete`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then((res) => {
+            setLoading(false);
+            Router.push(`/user/${user.username}`);
+        });
+
+        return {
+            message: 'Successfully deleted map',
+        };
     };
 
     return (
@@ -95,9 +116,26 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
                                 components={renderers}
                             />
                         </Box>
-                        <Button colorScheme='blue' onClick={handleDownload}>
-                            Download
-                        </Button>
+                        <HStack>
+                            <Button
+                                isDisabled
+                                colorScheme='blue'
+                                onClick={handleDownload}
+                            >
+                                Download
+                            </Button>
+                            {map.authorId === user?.id ? (
+                                <Button
+                                    isLoading={isloading}
+                                    colorScheme='red'
+                                    onClick={handleDelete}
+                                >
+                                    Delete Map
+                                </Button>
+                            ) : (
+                                <></>
+                            )}
+                        </HStack>
                     </VStack>
                 </VStack>
             ) : (
