@@ -120,37 +120,28 @@ const Login = () => {
                             }}
                         />
 
-                        {loading ? (
-                            <Alert rounded='md' w='min-content'>
-                                <AlertIcon />
-                                <AlertTitle>Submitting...</AlertTitle>
-                            </Alert>
-                        ) : (
-                            <HStack
-                                display='flex'
-                                justifyContent='space-between'
-                                width='stretch'
+                        <HStack
+                            display='flex'
+                            justifyContent='space-between'
+                            width='stretch'
+                        >
+                            <Button
+                                isLoading={loading}
+                                colorScheme='blue'
+                                type='submit'
+                                onClick={handleLogin}
                             >
-                                <Button
-                                    colorScheme='blue'
-                                    type='submit'
-                                    onClick={handleLogin}
-                                >
-                                    Submit
-                                </Button>
-                                <HStack>
-                                    <Text color='gray.500' fontWeight='bold'>
-                                        Dont have an account?
-                                    </Text>
-                                    <Link
-                                        color='blue.600'
-                                        href='/auth/register'
-                                    >
-                                        Register now!
-                                    </Link>
-                                </HStack>
+                                Submit
+                            </Button>
+                            <HStack>
+                                <Text color='gray.500' fontWeight='bold'>
+                                    Dont have an account?
+                                </Text>
+                                <Link color='blue.600' href='/auth/register'>
+                                    Register now!
+                                </Link>
                             </HStack>
-                        )}
+                        </HStack>
                     </VStack>
                 </FormControl>
             </VStack>

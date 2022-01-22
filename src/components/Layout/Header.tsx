@@ -72,7 +72,7 @@ const Header: React.FC<any> = ({ props: any }) => {
 
     const [isOpenDelete, setIsOpenDelete] = React.useState(false);
     const onCloseDelete = () => setIsOpenDelete(false);
-    const cancelRef = React.useRef();
+    const cancelRef: React.RefObject<any> | undefined = React.useRef();
 
     const handleDeleteUser = async () => {
         const response = await fetch(`${API_URL}/user/delete`, {
@@ -286,6 +286,14 @@ const Header: React.FC<any> = ({ props: any }) => {
                                             </Alert>
                                         )}
                                         <Button
+                                            colorScheme='red'
+                                            onClick={() =>
+                                                setIsOpenDelete(true)
+                                            }
+                                        >
+                                            Delete Account
+                                        </Button>
+                                        <Button
                                             variant='solid'
                                             colorScheme='blue'
                                             type='submit'
@@ -298,15 +306,6 @@ const Header: React.FC<any> = ({ props: any }) => {
                                             }}
                                         >
                                             Save
-                                        </Button>
-
-                                        <Button
-                                            colorScheme='red'
-                                            onClick={() =>
-                                                setIsOpenDelete(true)
-                                            }
-                                        >
-                                            Delete Account
                                         </Button>
 
                                         <AlertDialog

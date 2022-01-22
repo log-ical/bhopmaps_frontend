@@ -125,6 +125,7 @@ const Upload = () => {
 
                         <FormLabel htmlFor='file'>Choose file</FormLabel>
                         <Input
+                            className='file-input'
                             id='file'
                             type='file'
                             ref={fileInput}
@@ -144,7 +145,7 @@ const Upload = () => {
                         )}
 
                         {error && (
-                            <Alert variant='subtle' status='error'>
+                            <Alert variant='subtle' status='error' rounded='md'>
                                 <AlertIcon />
                                 <AlertTitle>Error</AlertTitle>
                                 {error}
@@ -152,7 +153,7 @@ const Upload = () => {
                         )}
 
                         {success && (
-                            <Alert variant='subtle' status='success'>
+                            <Alert variant='subtle' status='success' rounded='md'>
                                 <AlertIcon />
                                 <AlertTitle>Success</AlertTitle>
                                 Succesfully uploaded map!
