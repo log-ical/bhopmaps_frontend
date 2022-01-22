@@ -38,16 +38,6 @@ type Map = {
 };
 
 const Profile: React.FC<{ data: any; maps: any }> = ({ data, maps }) => {
-    const joined = new Date(data.userData?.createdAt).toLocaleDateString(
-        'en-US',
-        {
-            weekday: 'short',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-        }
-    );
-
     const cardBackground = useColorModeValue('gray.50', 'gray.800');
     const hoverBg = useColorModeValue('gray.200', 'gray.700');
     const { colorMode, toggleColorMode } = useColorMode();
@@ -81,16 +71,12 @@ const Profile: React.FC<{ data: any; maps: any }> = ({ data, maps }) => {
                                 <Text color='gray.500'>Registered since:</Text>
                                 <Text fontWeight='bold' color='gray.500'>
                                     {' '}
-                                    {joined}
+                                    {createDate(data.userData?.createdAt)}
                                 </Text>
                             </HStack>
                             <HStack>
                                 <NextLink href='/' passHref>
-                                    <Button
-                                        p={2}
-                                        size='sm'
-                                        variant='solid'
-                                    >
+                                    <Button p={2} size='sm' variant='solid'>
                                         Back
                                     </Button>
                                 </NextLink>

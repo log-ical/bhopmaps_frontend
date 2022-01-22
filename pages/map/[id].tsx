@@ -63,9 +63,15 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
                         </HStack>
                         <HStack>
                             <Text color='gray.500'>Published on</Text>
-                            <Text color='gray.500' fontWeight='bold'>{createDate(map.createdAt)}</Text>
+                            <Text color='gray.500' fontWeight='bold'>
+                                {createDate(map.createdAt)}
+                            </Text>
                             <Text color='gray.500'>by</Text>
-                            <Link fontWeight='bold' color='blue.600' href={`/user/${map.author}`}>
+                            <Link
+                                fontWeight='bold'
+                                color='blue.600'
+                                href={`/user/${map.author}`}
+                            >
                                 {' '}
                                 {map.author}
                             </Link>

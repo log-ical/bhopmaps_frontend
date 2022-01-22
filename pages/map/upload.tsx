@@ -20,7 +20,7 @@ import { API_URL, UserContext } from 'src/api/UserContext';
 const Upload = () => {
     const [mapName, setMapname] = React.useState('');
     const [thumbnail, setThumbnail] = React.useState('');
-    const fileInput = React.useRef();
+    const fileInput: any = React.useRef();
     const [description, setDescription] = React.useState('');
     const [error, setError] = React.useState('');
     const [success, setSuccess] = React.useState(false);
