@@ -59,9 +59,6 @@ const Home: React.FC<any> = ({ data }) => {
         let newCount = currentPostCount + 2;
         // Increment by 2
         setCurrentPostCount(newCount);
-        if(maps.length > 2) {
-            setShowLoadMoreButton(true);
-        }
         
         // If the new count is greater than the total count, hide the button
         if (newCount >= maps.length) {
