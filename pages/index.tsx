@@ -144,7 +144,7 @@ const Home: React.FC<any> = ({ data }) => {
                     .slice(0, currentPostCount)
                     .map((map: Map) => (
                         <ListItem key={map.id}>
-                            <NextLink href={`/map/${map.id}`}>
+                            <NextLink href={`/maps/${map.id}`}>
                                 <VStack
                                     bg={cardBackground}
                                     w='full'
@@ -193,7 +193,7 @@ const Home: React.FC<any> = ({ data }) => {
                                                     src={map.thumbnail}
                                                     alt='Map thumbnail'
                                                     rounded='md'
-                                                    width={20}
+                                                    width='80px'
                                                 />
 
                                                 <Text color='gray.500'>

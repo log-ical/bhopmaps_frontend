@@ -76,7 +76,7 @@ const Profile: React.FC<{ data: any; maps: any }> = ({ data, maps }) => {
                             </HStack>
                             <HStack>
                                 <NextLink href='/' passHref>
-                                    <Button p={2} size='sm' variant='solid'>
+                                    <Button size='md' variant='solid'>
                                         Back
                                     </Button>
                                 </NextLink>
@@ -119,7 +119,7 @@ const Profile: React.FC<{ data: any; maps: any }> = ({ data, maps }) => {
                                 .map((map: Map) => (
                                     <>
                                         <ListItem key={map.id}>
-                                            <NextLink href={`/map/${map.id}`}>
+                                            <NextLink href={`/maps/${map.id}`}>
                                                 <VStack
                                                     bg={cardBackground}
                                                     w='full'

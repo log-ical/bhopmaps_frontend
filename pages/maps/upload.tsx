@@ -12,6 +12,10 @@ import {
     AlertIcon,
     Link,
     Spinner,
+    Select,
+    RadioGroup,
+    Stack,
+    Radio,
 } from '@chakra-ui/react';
 import Router from 'next/router';
 import React from 'react';
@@ -23,20 +27,40 @@ const Upload = () => {
     const fileInput: any = React.useRef();
     const [description, setDescription] = React.useState('');
     const [error, setError] = React.useState('');
+    const [gameType, setGameType] = React.useState('CSS');
     const [success, setSuccess] = React.useState(false);
     const [submitting, setSubmitting] = React.useState(false);
 
-    const { user } = React.useContext(UserContext);
+    const fileTypes =
+        'zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed';
 
-    function handleSubmit(e: any) {
+    const { user } = React.useContext(UserContext);
+    console.log(gameType);
+    const handleSubmit = (e: any) => {
         e.preventDefault();
         setSubmitting(true);
+
+        if (fileInput.current.files[0].size > 100000000) {
+            setError('File size is too big');
+            setSubmitting(false);
+            return;
+        }
+
+        if (
+            fileInput.current.files[0].type !== 'application/x-zip-compressed'
+        ) {
+            console.log(fileInput.current.files[0].type);
+            setError('File type is not zip');
+            setSubmitting(false);
+            return;
+        }
 
         const formData = new FormData();
         formData.append('mapName', mapName);
         formData.append('thumbnail', thumbnail);
         formData.append('file', fileInput.current.files![0]);
         formData.append('description', description);
+        formData.append('gameType', gameType);
 
         try {
             fetch(`${API_URL}/map/new`, {
@@ -67,8 +91,9 @@ const Upload = () => {
                     }, 2000);
                 } else {
                     setSuccess(true);
-                    setSubmitting(false);
+
                     setTimeout(() => {
+                        setSubmitting(false);
                         Router.push('/');
                     }, 2000);
                 }
@@ -76,7 +101,7 @@ const Upload = () => {
         } catch (e) {
             return;
         }
-    }
+    };
 
     return (
         <>
@@ -85,6 +110,7 @@ const Upload = () => {
                     <VStack alignItems='flex-start' spacing={4}>
                         <FormLabel htmlFor='mapName'>Map name</FormLabel>
                         <Input
+                            isDisabled={submitting}
                             id='username'
                             type='text'
                             value={mapName}
@@ -95,10 +121,11 @@ const Upload = () => {
                             Choose thumbnail
                         </FormLabel>
                         <Input
+                            isDisabled={submitting}
                             id='thumbnail'
                             type='text'
                             value={thumbnail}
-                            accept='.zip'
+                            accept={fileTypes}
                             onChange={(e) => setThumbnail(e.target.value)}
                         />
 
@@ -112,6 +139,7 @@ const Upload = () => {
                         </HStack>
                         <Textarea
                             id='description'
+                            isDisabled={submitting}
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                             size='sm'
@@ -125,6 +153,7 @@ const Upload = () => {
 
                         <FormLabel htmlFor='file'>Choose file</FormLabel>
                         <Input
+                            isDisabled={submitting}
                             className='file-input'
                             id='file'
                             type='file'
@@ -132,6 +161,17 @@ const Upload = () => {
                             variant='unstyled'
                             accept='.zip'
                         />
+                        <FormLabel htmlFor='gameType'>Choose game</FormLabel>
+                        <RadioGroup
+                            isDisabled={submitting}
+                            onChange={setGameType}
+                            value={gameType}
+                        >
+                            <Stack direction='row'>
+                                <Radio value='CSS'>CSS</Radio>
+                                <Radio value='CSGO'>CSGO</Radio>
+                            </Stack>
+                        </RadioGroup>
                         <Button
                             isLoading={submitting}
                             type='submit'

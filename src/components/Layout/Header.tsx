@@ -106,7 +106,7 @@ const Header: React.FC<any> = ({ props: any }) => {
     };
 
     const handleNewMap = () => {
-        Router.push('/map/upload');
+        Router.push('/maps/upload');
     };
 
     const handleEditUser = () => {

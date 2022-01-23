@@ -105,6 +105,7 @@ const Register: React.FC<any> = ({ props: any }) => {
                             width='stretch'
                         >
                             <Button
+                                isLoading={success}
                                 colorScheme='blue'
                                 type='submit'
                                 onClick={handleRegister}
