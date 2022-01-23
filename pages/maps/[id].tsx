@@ -23,14 +23,16 @@ import lightTheme from 'react-syntax-highlighter/dist/esm/styles/prism/base16-at
 import ReactMarkdown from 'react-markdown';
 import NextLink from 'next/link';
 import { createDate } from 'src/utils/createDate';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { HiDownload } from 'react-icons/hi';
+import { formatNumber } from 'src/utils/numberFormatter';
 
 const Map: React.FC<{ data: any }> = ({ data }) => {
     const { map } = data;
     const { colorMode, toggleColorMode } = useColorMode();
     const { user } = useContext(UserContext);
     const [isloading, setLoading] = React.useState(false);
+    const [error, setError] = React.useState('');
 
     const renderers = {
         code: (props: any) => {
@@ -53,11 +55,27 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
         h3: (props: any) => <Heading as='h3' size='sm' {...props} />,
         a: (props: any) => <Button as='a' size='sm' my={2} {...props} />,
     };
+
     const handleDownload = async () => {
         setLoading(true);
-        const res = await fetch(`${API_URL}/map/${map.id}/download/`, {
+        const res = await fetch(`${API_URL}/map/${map.id}/download`, {
             method: 'PUT',
+            headers: {
+                'x-api-key': `${user?.betaKey}`,
+            },
         });
+
+        if (!user) {
+            setError('You must be a beta user to download maps');
+            setLoading(false);
+            return;
+        }
+
+        if (!user.isBeta) {
+            setError('You must be a beta user to download maps');
+            setLoading(false);
+            return;
+        }
 
         const downloadUrl = await res.json();
         Router.push(downloadUrl.url);
@@ -105,18 +123,18 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
                                     <Heading>{map.mapName}</Heading>
                                     <HStack>
                                         <Tag colorScheme='cyan'>
-                                            <TagLabel>{map.downloads}</TagLabel>
+                                            <TagLabel>{formatNumber(map.downloads)}</TagLabel>
                                             <TagRightIcon
                                                 boxSize='12px'
                                                 as={HiDownload}
                                             />
                                         </Tag>
                                         {map.gameType === 'CSS' ? (
-                                            <Tag colorScheme='red'>
+                                            <Tag colorScheme='green'>
                                                 {map.gameType}
                                             </Tag>
                                         ) : (
-                                            <Tag colorScheme='yellow'>
+                                            <Tag colorScheme='blue'>
                                                 {map.gameType}
                                             </Tag>
                                         )}
@@ -193,6 +211,11 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
                                 Download map
                             </Button>
                         </HStack>
+                        {error && (
+                            <Box>
+                                <Text color='red.500'>{error}</Text>
+                            </Box>
+                        )}
                     </VStack>
                 </Box>
             ) : (

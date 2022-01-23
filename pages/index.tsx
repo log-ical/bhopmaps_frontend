@@ -15,14 +15,18 @@ import {
     AspectRatio,
     ListItem,
     Button,
+    Tag,
+    TagLabel,
+    TagRightIcon,
 } from '@chakra-ui/react';
-import { HiOutlineSearch } from 'react-icons/hi';
+import { HiDownload, HiOutlineSearch } from 'react-icons/hi';
 import type { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
 import * as React from 'react';
 import fetch from 'node-fetch';
 import { API_URL } from 'src/api/UserContext';
 import NextLink from 'next/link';
+import { formatNumber } from 'src/utils/numberFormatter';
 
 type Map = {
     id: string;
@@ -31,7 +35,8 @@ type Map = {
     mapName: string;
     thumbnail: string;
     description: string;
-    download: string;
+    downloads: number;
+    gameType: string;
     createdAt: Date;
     updatedAt: Date;
 };
@@ -183,6 +188,28 @@ const Home: React.FC<any> = ({ data }) => {
                                                 >
                                                     {map.mapName}
                                                 </Heading>
+                                                <HStack>
+                                                    <Tag colorScheme='cyan'>
+                                                        <TagLabel>
+                                                            {formatNumber(
+                                                                map.downloads
+                                                            )}
+                                                        </TagLabel>
+                                                        <TagRightIcon
+                                                            boxSize='12px'
+                                                            as={HiDownload}
+                                                        />
+                                                    </Tag>
+                                                    {map.gameType === 'CSS' ? (
+                                                        <Tag colorScheme='green'>
+                                                            {map.gameType}
+                                                        </Tag>
+                                                    ) : (
+                                                        <Tag colorScheme='blue'>
+                                                            {map.gameType}
+                                                        </Tag>
+                                                    )}
+                                                </HStack>
                                                 <Text color='gray.500'>
                                                     by {map.author}
                                                 </Text>

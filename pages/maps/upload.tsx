@@ -35,7 +35,7 @@ const Upload = () => {
         'zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed';
 
     const { user } = React.useContext(UserContext);
-    console.log(gameType);
+
     const handleSubmit = (e: any) => {
         e.preventDefault();
         setSubmitting(true);

@@ -13,7 +13,7 @@ import {
     HStack,
     Link,
 } from '@chakra-ui/react';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import React from 'react';
 import { API_URL } from 'src/api/UserContext';
 
@@ -23,6 +23,7 @@ const Register: React.FC<any> = ({ props: any }) => {
 
     const [error, setError] = React.useState('');
     const [success, setSuccess] = React.useState(false);
+    const router = useRouter()
 
     const handleRegister = (e: any) => {
         e.preventDefault();
@@ -43,27 +44,41 @@ const Register: React.FC<any> = ({ props: any }) => {
             return;
         }
 
+        // get url params
+        const { query } = router;
+        const { key } = query;
+       
         // Handle registering
         const authUrl = `${API_URL}/register`;
         console.log('Sending request to:', authUrl);
         // send to server
-        fetch(authUrl, {
+        const request = fetch(authUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'X-API-KEY': `${key}`,
             },
             body: JSON.stringify({
                 username,
                 password,
             }),
+        }).then((response) => {
+            if (response.status === 401) {
+                setError('You have to provide an API-KEY');
+                setTimeout(() => {
+                    setError('');
+                }, 3000);
+                return;
+            } else {
+                setSuccess(true);
+                setTimeout(() => {
+                    setSuccess(false);
+                    setError('');
+                    Router.push('/auth/login');
+                }, 2000);
+            }
+            return response.json();
         });
-
-        setSuccess(true);
-        setTimeout(() => {
-            setSuccess(false);
-            setError('');
-            Router.push('/auth/login');
-        }, 2000);
     };
     return (
         <>
