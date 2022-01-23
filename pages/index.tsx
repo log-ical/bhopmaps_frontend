@@ -46,19 +46,24 @@ const Home: React.FC<any> = ({ data }) => {
         'bhopmaps.com is a platform for CSS & CSGO bunnyhop maps.';
     const maps = data;
 
+
     const cardBackground = useColorModeValue('gray.50', 'gray.800');
     const hoverBg = useColorModeValue('gray.200', 'gray.700');
     const { colorMode, toggleColorMode } = useColorMode();
 
     // Load More Button
     const [currentPostCount, setCurrentPostCount] = React.useState(3);
-    const [showLoadMoreButton, setShowLoadMoreButton] = React.useState(true);
+    const [showLoadMoreButton, setShowLoadMoreButton] = React.useState(false);
     const handlePostCount = (e: any) => {
         e.preventDefault();
         let newCount = currentPostCount + 2;
         // Increment by 2
         setCurrentPostCount(newCount);
-
+        if(maps.length > 2) {
+            setShowLoadMoreButton(true);
+        }
+        
+        // If the new count is greater than the total count, hide the button
         if (newCount >= maps.length) {
             setCurrentPostCount(maps.length);
             setShowLoadMoreButton(false);
