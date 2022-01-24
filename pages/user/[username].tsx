@@ -5,43 +5,18 @@ import {
     VStack,
     Image,
     HStack,
-    InputGroup,
-    Input,
-    InputLeftElement,
-    Icon,
     Divider,
-    useColorModeValue,
-    useColorMode,
-    Stack,
-    List,
-    ListItem,
     Button,
-    Tag,
-    TagLabel,
-    TagRightIcon,
 } from '@chakra-ui/react';
 import { API_URL } from 'src/api/UserContext';
 import { GetServerSideProps } from 'next';
 import fetch from 'node-fetch';
-import { HiDownload, HiOutlineSearch } from 'react-icons/hi';
 import config from '../../config.json';
 import NextLink from 'next/link';
 import { createDate } from 'src/utils/createDate';
-import { formatNumber } from 'src/utils/numberFormatter';
-import { Map, User } from 'src/api/types';
+import ListGridView from '@/src/components/ListGridView';
 
 const Profile: React.FC<{ data: any; maps: any }> = ({ data, maps }) => {
-    const cardBackground = useColorModeValue('gray.50', 'gray.800');
-    const hoverBg = useColorModeValue('gray.200', 'gray.700');
-    const { colorMode, toggleColorMode } = useColorMode();
-
-    // Filtering
-    const [searchByTitle, setSearchByTitle] = React.useState('');
-
-    const handleSearchByTitle = (e: any) => {
-        e.preventDefault();
-        setSearchByTitle(e.target.value);
-    };
     return (
         <>
             {data.statusCode != 400 ? (
@@ -76,144 +51,9 @@ const Profile: React.FC<{ data: any; maps: any }> = ({ data, maps }) => {
                             </HStack>
                         </VStack>
                         <Divider />
-                        <HStack w='full'>
-                            <InputGroup size='md'>
-                                <Input
-                                    placeholder={config.searchTextPlaceHolder}
-                                    value={searchByTitle}
-                                    onChange={handleSearchByTitle}
-                                    rounded='md'
-                                    variant='filled'
-                                />
-                                <InputLeftElement>
-                                    <Icon
-                                        as={HiOutlineSearch}
-                                        w={6}
-                                        h={6}
-                                        color='gray.600'
-                                    />
-                                </InputLeftElement>
-                            </InputGroup>
-                        </HStack>
                     </VStack>
                     {maps.length > 0 ? (
-                        <List spacing={6}>
-                            {maps
-                                .filter((maps: any) =>
-                                    maps.mapName
-                                        .toLowerCase()
-                                        .includes(searchByTitle.toLowerCase())
-                                )
-                                .sort((a: any, b: any) => {
-                                    const aDate = new Date(a.createdAt);
-                                    const bDate = new Date(b.createdAt);
-                                    return bDate.getTime() - aDate.getTime();
-                                })
-                                .map((map: Map) => (
-                                    <>
-                                        <ListItem key={map.id}>
-                                            <NextLink href={`/maps/${map.id}`}>
-                                                <VStack
-                                                    bg={cardBackground}
-                                                    w='full'
-                                                    p={{ base: 4, md: 6 }}
-                                                    rounded='md'
-                                                    alignItems='stretch'
-                                                    transitionProperty='all'
-                                                    transitionDuration='slow'
-                                                    transitionTimingFunction='ease-out'
-                                                    _hover={{
-                                                        bg: hoverBg,
-                                                        transform:
-                                                            'scale(1.025, 1.025)',
-                                                    }}
-                                                    cursor='pointer'
-                                                >
-                                                    <Stack
-                                                        w='full'
-                                                        justifyContent='space-between'
-                                                        direction={{
-                                                            base: 'column',
-                                                            md: 'row',
-                                                        }}
-                                                    >
-                                                        <HStack
-                                                            justifyContent='space-between'
-                                                            width='stretch'
-                                                        >
-                                                            <VStack alignItems='flex-start'>
-                                                                <Heading
-                                                                    size='md'
-                                                                    color={
-                                                                        colorMode ===
-                                                                        'light'
-                                                                            ? 'gray.700'
-                                                                            : 'white'
-                                                                    }
-                                                                >
-                                                                    {
-                                                                        map.mapName
-                                                                    }
-                                                                </Heading>
-                                                                <HStack>
-                                                                    <Tag colorScheme='cyan'>
-                                                                        <TagLabel>
-                                                                            {formatNumber(
-                                                                                map.downloads
-                                                                            )}
-                                                                        </TagLabel>
-                                                                        <TagRightIcon
-                                                                            boxSize='12px'
-                                                                            as={
-                                                                                HiDownload
-                                                                            }
-                                                                        />
-                                                                    </Tag>
-                                                                    {map.gameType ===
-                                                                    'CSS' ? (
-                                                                        <Tag colorScheme='green'>
-                                                                            {
-                                                                                map.gameType
-                                                                            }
-                                                                        </Tag>
-                                                                    ) : (
-                                                                        <Tag colorScheme='blue'>
-                                                                            {
-                                                                                map.gameType
-                                                                            }
-                                                                        </Tag>
-                                                                    )}
-                                                                </HStack>
-                                                                <Text color='gray.500'>
-                                                                    by{' '}
-                                                                    {map.author}
-                                                                </Text>
-                                                            </VStack>
-
-                                                            <VStack alignItems='flex-end'>
-                                                                <Image
-                                                                    src={
-                                                                        map.thumbnail
-                                                                    }
-                                                                    alt='Map thumbnail'
-                                                                    rounded='md'
-                                                                    width='80px'
-                                                                />
-
-                                                                <Text color='gray.500'>
-                                                                    {createDate(
-                                                                        map.createdAt
-                                                                    )}
-                                                                </Text>
-                                                            </VStack>
-                                                        </HStack>
-                                                    </Stack>
-                                                </VStack>
-                                            </NextLink>
-                                        </ListItem>
-                                    </>
-                                ))}
-                        </List>
+                        <ListGridView data={maps} />
                     ) : (
                         <Text
                             color='gray.500'
