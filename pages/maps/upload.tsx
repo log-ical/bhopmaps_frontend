@@ -97,7 +97,7 @@ const Upload = () => {
                 }
             });
         } catch (e) {
-            return console.log(e);
+            return;
         }
     };
 
