@@ -25,7 +25,7 @@ const Register: React.FC<any> = ({ props: any }) => {
     const [success, setSuccess] = React.useState(false);
     const router = useRouter();
 
-    const handleRegister = (e: any) => {
+    const handleRegister = async (e: any) => {
         e.preventDefault();
 
         if (username === '' || password === '') {
@@ -41,6 +41,17 @@ const Register: React.FC<any> = ({ props: any }) => {
             setTimeout(() => {
                 setError('');
             }, 3000);
+            return;
+        }
+
+        const existingUser = await fetch(`${API_URL}/user/${username}`)
+        const existingUserData = await existingUser.json();
+
+        if (existingUserData.username === username) {
+            setError('Username already exists');
+            setTimeout(() => {
+                setError('');
+            }, 2000);
             return;
         }
 
