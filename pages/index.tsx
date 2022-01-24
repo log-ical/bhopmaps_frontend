@@ -18,6 +18,8 @@ import {
     Tag,
     TagLabel,
     TagRightIcon,
+    Grid,
+    GridItem,
 } from '@chakra-ui/react';
 import { HiDownload, HiOutlineSearch } from 'react-icons/hi';
 import type { GetServerSideProps, NextPage } from 'next';
@@ -27,6 +29,8 @@ import fetch from 'node-fetch';
 import { API_URL } from 'src/api/UserContext';
 import NextLink from 'next/link';
 import { formatNumber } from 'src/utils/numberFormatter';
+
+import {BsFillGridFill, BsList} from 'react-icons/bs'
 
 type Map = {
     id: string;
@@ -46,10 +50,18 @@ const Home: React.FC<any> = ({ data }) => {
         'bhopmaps.com is a platform for CSS & CSGO bunnyhop maps.';
     const maps = data;
 
-
     const cardBackground = useColorModeValue('gray.50', 'gray.800');
     const hoverBg = useColorModeValue('gray.200', 'gray.700');
     const { colorMode, toggleColorMode } = useColorMode();
+    const [isGridView, setGriedView] = React.useState(false);
+    const [gridButtonLabel, setGridButtonLabel] = React.useState('List View')
+    const [gridButtonIcon, setGridButtonIcon] = React.useState(<BsList/>)
+
+    const handleGridView = () => {
+        setGriedView(!isGridView);
+        setGridButtonLabel(isGridView ? 'Grid View' : 'List View');
+        setGridButtonIcon(isGridView ? <BsFillGridFill/> : <BsList/>)
+    }
 
     // Load More Button
     const [currentPostCount, setCurrentPostCount] = React.useState(8);
@@ -59,7 +71,7 @@ const Home: React.FC<any> = ({ data }) => {
         let newCount = currentPostCount + 2;
         // Increment by 2
         setCurrentPostCount(newCount);
-        
+
         // If the new count is greater than the total count, hide the button
         if (newCount >= maps.length) {
             setCurrentPostCount(maps.length);
@@ -135,51 +147,160 @@ const Home: React.FC<any> = ({ data }) => {
                         />
                     </InputLeftElement>
                 </InputGroup>
+                <Button leftIcon={gridButtonIcon} onClick={handleGridView}> {gridButtonLabel} </Button>
             </HStack>
-            <List spacing={6}>
-                {maps
-                    .filter((maps: any) =>
-                        maps.mapName
-                            .toLowerCase()
-                            .includes(searchByTitle.toLowerCase())
-                    )
-                    .sort((a: any, b: any) => {
-                        const aDate = new Date(a.createdAt);
-                        const bDate = new Date(b.createdAt);
-                        return bDate.getTime() - aDate.getTime();
-                    })
-                    .slice(0, currentPostCount)
-                    .map((map: Map) => (
-                        <ListItem key={map.id}>
-                            <NextLink href={`/maps/${map.id}`}>
-                                <VStack
-                                    bg={cardBackground}
-                                    w='full'
-                                    p={{ base: 4, md: 6 }}
-                                    rounded='md'
-                                    alignItems='stretch'
-                                    transitionProperty='all'
-                                    transitionDuration='slow'
-                                    transitionTimingFunction='ease-out'
-                                    _hover={{
-                                        bg: hoverBg,
-                                        transform: 'scale(1.025, 1.025)',
-                                    }}
-                                    cursor='pointer'
-                                >
-                                    <Stack
+            {isGridView ? (
+                <List spacing={6}>
+                    {maps
+                        .filter((maps: any) =>
+                            maps.mapName
+                                .toLowerCase()
+                                .includes(searchByTitle.toLowerCase())
+                        )
+                        .sort((a: any, b: any) => {
+                            const aDate = new Date(a.createdAt);
+                            const bDate = new Date(b.createdAt);
+                            return bDate.getTime() - aDate.getTime();
+                        })
+                        .slice(0, currentPostCount)
+                        .map((map: Map) => (
+                            <ListItem key={map.id}>
+                                <NextLink href={`/maps/${map.id}`}>
+                                    <VStack
+                                        bg={cardBackground}
                                         w='full'
-                                        justifyContent='space-between'
-                                        direction={{
-                                            base: 'column',
-                                            md: 'row',
+                                        p={{ base: 4, md: 6 }}
+                                        rounded='md'
+                                        alignItems='stretch'
+                                        transitionProperty='all'
+                                        transitionDuration='slow'
+                                        transitionTimingFunction='ease-out'
+                                        _hover={{
+                                            bg: hoverBg,
+                                            transform: 'scale(1.025, 1.025)',
                                         }}
+                                        cursor='pointer'
                                     >
-                                        <HStack
+                                        <Stack
+                                            w='full'
                                             justifyContent='space-between'
-                                            width='stretch'
+                                            direction={{
+                                                base: 'column',
+                                                md: 'row',
+                                            }}
+                                        >
+                                            <HStack
+                                                justifyContent='space-between'
+                                                width='stretch'
+                                            >
+                                                <VStack alignItems='flex-start'>
+                                                    <Heading
+                                                        size='md'
+                                                        color={
+                                                            colorMode ===
+                                                            'light'
+                                                                ? 'gray.700'
+                                                                : 'white'
+                                                        }
+                                                    >
+                                                        {map.mapName}
+                                                    </Heading>
+                                                    <HStack>
+                                                        <Tag colorScheme='cyan'>
+                                                            <TagLabel>
+                                                                {formatNumber(
+                                                                    map.downloads
+                                                                )}
+                                                            </TagLabel>
+                                                            <TagRightIcon
+                                                                boxSize='12px'
+                                                                as={HiDownload}
+                                                            />
+                                                        </Tag>
+                                                        {map.gameType ===
+                                                        'CSS' ? (
+                                                            <Tag colorScheme='green'>
+                                                                {map.gameType}
+                                                            </Tag>
+                                                        ) : (
+                                                            <Tag colorScheme='blue'>
+                                                                {map.gameType}
+                                                            </Tag>
+                                                        )}
+                                                    </HStack>
+                                                    <Text color='gray.500'>
+                                                        by {map.author}
+                                                    </Text>
+                                                </VStack>
+
+                                                <VStack alignItems='flex-end'>
+                                                    <Image
+                                                        src={map.thumbnail}
+                                                        alt='Map thumbnail'
+                                                        rounded='md'
+                                                        width='80px'
+                                                    />
+
+                                                    <Text color='gray.500'>
+                                                        {createDate(
+                                                            map.createdAt
+                                                        )}
+                                                    </Text>
+                                                </VStack>
+                                            </HStack>
+                                        </Stack>
+                                    </VStack>
+                                </NextLink>
+                            </ListItem>
+                        ))}
+                </List>
+            ) : (
+                <Grid templateColumns='repeat(2, 1fr)' gap={6}>
+                    {maps
+                        .filter((maps: any) =>
+                            maps.mapName
+                                .toLowerCase()
+                                .includes(searchByTitle.toLowerCase())
+                        )
+                        .sort((a: any, b: any) => {
+                            const aDate = new Date(a.createdAt);
+                            const bDate = new Date(b.createdAt);
+                            return bDate.getTime() - aDate.getTime();
+                        })
+                        .slice(0, currentPostCount)
+                        .map((map: Map) => (
+                            <GridItem key={map.id}>
+                                <NextLink href={`/maps/${map.id}`}>
+                                    <VStack
+                                        bg={cardBackground}
+                                        w='full'
+                                        p={{ base: 4, md: 6 }}
+                                        rounded='md'
+                                        alignItems='stretch'
+                                        transitionProperty='all'
+                                        transitionDuration='slow'
+                                        transitionTimingFunction='ease-out'
+                                        _hover={{
+                                            bg: hoverBg,
+                                            transform: 'scale(1.025, 1.025)',
+                                        }}
+                                        cursor='pointer'
+                                    >
+                                        <Stack
+                                            w='full'
+                                            justifyContent='space-between'
+                                            direction={{
+                                                base: 'column',
+                                                md: 'row',
+                                            }}
                                         >
                                             <VStack alignItems='flex-start'>
+                                                <Image
+                                                    src={map.thumbnail}
+                                                    alt='Map thumbnail'
+                                                    rounded='md'
+                                                    width='80px'
+                                                />
                                                 <Heading
                                                     size='md'
                                                     color={
@@ -215,27 +336,17 @@ const Home: React.FC<any> = ({ data }) => {
                                                 <Text color='gray.500'>
                                                     by {map.author}
                                                 </Text>
-                                            </VStack>
-
-                                            <VStack alignItems='flex-end'>
-                                                <Image
-                                                    src={map.thumbnail}
-                                                    alt='Map thumbnail'
-                                                    rounded='md'
-                                                    width='80px'
-                                                />
-
                                                 <Text color='gray.500'>
                                                     {createDate(map.createdAt)}
                                                 </Text>
                                             </VStack>
-                                        </HStack>
-                                    </Stack>
-                                </VStack>
-                            </NextLink>
-                        </ListItem>
-                    ))}
-            </List>
+                                        </Stack>
+                                    </VStack>
+                                </NextLink>
+                            </GridItem>
+                        ))}
+                </Grid>
+            )}
             {showLoadMoreButton && (
                 <Button variant='ghost' onClick={handlePostCount}>
                     Load more
