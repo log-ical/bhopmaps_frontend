@@ -38,7 +38,6 @@ const Upload = () => {
         e.preventDefault();
         setSubmitting(true);
 
-        // Handling fileInput
         if (fileInput.current.files[0].size > maxFileSize) {
             setError('File size is too big');
             setSubmitting(false);
@@ -48,6 +47,7 @@ const Upload = () => {
         if (
             fileInput.current.files[0].type !== 'application/x-zip-compressed'
         ) {
+            console.log(fileInput.current.files[0].type);
             setError('File type is not zip');
             setSubmitting(false);
             return;
@@ -145,7 +145,6 @@ const Upload = () => {
                             id='thumbnail'
                             type='text'
                             value={thumbnail}
-                            accept={fileTypes}
                             onChange={(e) => setThumbnail(e.target.value)}
                         />
 
