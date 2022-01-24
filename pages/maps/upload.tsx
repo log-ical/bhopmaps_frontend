@@ -184,7 +184,7 @@ const Upload = () => {
                             Choose file
                             <Text fontSize='x-small' color='gray.400'>
                                 {'\u2022'} Maxiumum file size:{' '}
-                                {maxFileSize * 10 ** -6}MB <br />
+                                {maxFileSize * 10 ** -7}MB <br />
                                 {'\u2022'} Allowed file formats: zip
                             </Text>
                         </FormLabel>
