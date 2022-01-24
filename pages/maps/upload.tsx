@@ -32,9 +32,6 @@ const Upload = () => {
     const [submitting, setSubmitting] = React.useState(false);
     const maxFileSize = 100000000;
 
-    const fileTypes =
-        'zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed';
-
     const { user } = React.useContext(UserContext);
 
     const handleSubmit = (e: any) => {
