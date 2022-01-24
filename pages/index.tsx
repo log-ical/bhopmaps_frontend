@@ -29,7 +29,8 @@ import { API_URL } from 'src/api/UserContext';
 import NextLink from 'next/link';
 import { formatNumber } from 'src/utils/numberFormatter';
 
-import {BsFillGridFill, BsList} from 'react-icons/bs'
+import { BsFillGridFill, BsList } from 'react-icons/bs';
+import { createDate } from 'src/utils/createDate';
 
 type Map = {
     id: string;
@@ -53,14 +54,14 @@ const Home: React.FC<any> = ({ data }) => {
     const hoverBg = useColorModeValue('gray.200', 'gray.700');
     const { colorMode, toggleColorMode } = useColorMode();
     const [isGridView, setGriedView] = React.useState(false);
-    const [gridButtonLabel, setGridButtonLabel] = React.useState('List View')
-    const [gridButtonIcon, setGridButtonIcon] = React.useState(<BsList/>)
+    const [gridButtonLabel, setGridButtonLabel] = React.useState('List View');
+    const [gridButtonIcon, setGridButtonIcon] = React.useState(<BsList />);
 
     const handleGridView = () => {
         setGriedView(!isGridView);
         setGridButtonLabel(isGridView ? 'Grid View' : 'List View');
-        setGridButtonIcon(isGridView ? <BsFillGridFill/> : <BsList/>)
-    }
+        setGridButtonIcon(isGridView ? <BsFillGridFill /> : <BsList />);
+    };
 
     // Load More Button
     const [currentPostCount, setCurrentPostCount] = React.useState(8);
@@ -78,17 +79,6 @@ const Home: React.FC<any> = ({ data }) => {
         } else {
             setShowLoadMoreButton(true);
         }
-    };
-
-    const createDate = (date: Date) => {
-        const dateObj = new Date(date).toLocaleDateString('en-US', {
-            weekday: 'short',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-        });
-
-        return dateObj;
     };
 
     // Filtering
@@ -146,7 +136,10 @@ const Home: React.FC<any> = ({ data }) => {
                         />
                     </InputLeftElement>
                 </InputGroup>
-                <Button leftIcon={gridButtonIcon} onClick={handleGridView}> {gridButtonLabel} </Button>
+                <Button leftIcon={gridButtonIcon} onClick={handleGridView}>
+                    {' '}
+                    {gridButtonLabel}{' '}
+                </Button>
             </HStack>
             {isGridView ? (
                 <List spacing={6}>
@@ -254,7 +247,10 @@ const Home: React.FC<any> = ({ data }) => {
                         ))}
                 </List>
             ) : (
-                <Grid templateColumns={{base: '1fr', sm: 'repeat(2, 1fr)'}} gap={6}>
+                <Grid
+                    templateColumns={{ base: '1fr', sm: 'repeat(2, 1fr)' }}
+                    gap={6}
+                >
                     {maps
                         .filter((maps: any) =>
                             maps.mapName

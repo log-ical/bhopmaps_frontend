@@ -16,26 +16,19 @@ import {
     List,
     ListItem,
     Button,
+    Tag,
+    TagLabel,
+    TagRightIcon,
 } from '@chakra-ui/react';
 import { API_URL } from 'src/api/UserContext';
 import { GetServerSideProps } from 'next';
 import fetch from 'node-fetch';
-import { HiOutlineSearch } from 'react-icons/hi';
+import { HiDownload, HiOutlineSearch } from 'react-icons/hi';
 import config from '../../config.json';
 import NextLink from 'next/link';
 import { createDate } from 'src/utils/createDate';
-
-type Map = {
-    id: string;
-    author: string;
-    authorId: string;
-    mapName: string;
-    thumbnail: string;
-    description: string;
-    download: string;
-    createdAt: Date;
-    updatedAt: Date;
-};
+import { formatNumber } from 'src/utils/numberFormatter';
+import { Map } from 'src/api/types';
 
 const Profile: React.FC<{ data: any; maps: any }> = ({ data, maps }) => {
     const cardBackground = useColorModeValue('gray.50', 'gray.800');
@@ -162,6 +155,35 @@ const Profile: React.FC<{ data: any; maps: any }> = ({ data, maps }) => {
                                                                         map.mapName
                                                                     }
                                                                 </Heading>
+                                                                <HStack>
+                                                                    <Tag colorScheme='cyan'>
+                                                                        <TagLabel>
+                                                                            {formatNumber(
+                                                                                map.downloads
+                                                                            )}
+                                                                        </TagLabel>
+                                                                        <TagRightIcon
+                                                                            boxSize='12px'
+                                                                            as={
+                                                                                HiDownload
+                                                                            }
+                                                                        />
+                                                                    </Tag>
+                                                                    {map.gameType ===
+                                                                    'CSS' ? (
+                                                                        <Tag colorScheme='green'>
+                                                                            {
+                                                                                map.gameType
+                                                                            }
+                                                                        </Tag>
+                                                                    ) : (
+                                                                        <Tag colorScheme='blue'>
+                                                                            {
+                                                                                map.gameType
+                                                                            }
+                                                                        </Tag>
+                                                                    )}
+                                                                </HStack>
                                                                 <Text color='gray.500'>
                                                                     by{' '}
                                                                     {map.author}
@@ -175,10 +197,10 @@ const Profile: React.FC<{ data: any; maps: any }> = ({ data, maps }) => {
                                                                     }
                                                                     alt='Map thumbnail'
                                                                     rounded='md'
-                                                                    width={20}
+                                                                    width='80px'
                                                                 />
 
-                                                                <Text>
+                                                                <Text color='gray.500'>
                                                                     {createDate(
                                                                         map.createdAt
                                                                     )}

@@ -123,7 +123,9 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
                                     <Heading>{map.mapName}</Heading>
                                     <HStack>
                                         <Tag colorScheme='cyan'>
-                                            <TagLabel>{formatNumber(map.downloads)}</TagLabel>
+                                            <TagLabel>
+                                                {formatNumber(map.downloads)}
+                                            </TagLabel>
                                             <TagRightIcon
                                                 boxSize='12px'
                                                 as={HiDownload}

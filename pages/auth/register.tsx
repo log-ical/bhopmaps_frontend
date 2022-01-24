@@ -23,7 +23,7 @@ const Register: React.FC<any> = ({ props: any }) => {
 
     const [error, setError] = React.useState('');
     const [success, setSuccess] = React.useState(false);
-    const router = useRouter()
+    const router = useRouter();
 
     const handleRegister = (e: any) => {
         e.preventDefault();
@@ -47,7 +47,7 @@ const Register: React.FC<any> = ({ props: any }) => {
         // get url params
         const { query } = router;
         const { key } = query;
-       
+
         // Handle registering
         const authUrl = `${API_URL}/register`;
         console.log('Sending request to:', authUrl);

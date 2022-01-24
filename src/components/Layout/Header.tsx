@@ -118,7 +118,10 @@ const Header: React.FC<any> = ({ props: any }) => {
             bodyUsername = user?.username;
         }
 
-        if (avatar.toLowerCase().endsWith('.jpg') || avatar.toLowerCase().endsWith('.png')) {
+        if (
+            avatar.toLowerCase().endsWith('.jpg') ||
+            avatar.toLowerCase().endsWith('.png')
+        ) {
             bodyAvatar = avatar;
         } else if (avatar === '') {
             bodyAvatar = user?.avatar;

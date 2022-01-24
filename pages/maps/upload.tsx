@@ -38,8 +38,6 @@ const Upload = () => {
         e.preventDefault();
         setSubmitting(true);
 
-        
-
         if (fileInput.current.files[0].size > maxFileSize) {
             setError('File size is too big');
             setSubmitting(false);
@@ -66,7 +64,7 @@ const Upload = () => {
             fetch(`${API_URL}/map/new`, {
                 method: 'POST',
                 body: formData,
-                credentials: 'include'
+                credentials: 'include',
             }).then((res) => {
                 if (description.length > 1000) {
                     setError('Description must be less than 500 characters');
@@ -99,7 +97,7 @@ const Upload = () => {
                 }
             });
         } catch (e) {
-            return console.log(e)
+            return console.log(e);
         }
     };
 
