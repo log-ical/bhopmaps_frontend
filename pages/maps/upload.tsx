@@ -70,8 +70,9 @@ const Upload = () => {
             fetch(`${API_URL}/map/new`, {
                 method: 'POST',
                 body: formData,
-                credentials: 'include',
+                credentials: 'include'
             }).then((res) => {
+                console.log(res)
                 if (description.length > 500) {
                     setError('Description must be less than 500 characters');
                     setSubmitting(false);
