@@ -152,13 +152,7 @@ const Upload = () => {
                             {description.length} / 500{' '}
                         </Text>
 
-                        <FormLabel htmlFor='file'>Choose file
-                            <Text fontSize='x-small' color='gray.400'>
-                            {'\u2022'} Maxiumum file size: {maxFileSize*10**-6}MB <br />
-                            {'\u2022'} Allowed file formats: zip
-                            </Text>
-                        </FormLabel>
-                        
+                        <FormLabel htmlFor='file'>Choose file</FormLabel>
                         <Input
                             isDisabled={submitting}
                             className='file-input'
