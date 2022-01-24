@@ -147,7 +147,7 @@ const Upload = () => {
                             maxHeight={400}
                         />
                         <Text fontSize='sm' color='gray.500'>
-                            {description.length} / 500{' '}
+                            {description.length} / 1000{' '}
                         </Text>
 
                         <FormLabel htmlFor='file'>Choose file</FormLabel>
