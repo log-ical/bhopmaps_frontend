@@ -57,7 +57,6 @@ const Upload = () => {
         formData.append('mapName', mapName);
         formData.append('thumbnail', thumbnail);
         formData.append('file', fileInput.current.files![0]);
-        formData.append('thumbnail', thumbnail);
         formData.append('description', description);
         formData.append('gameType', gameType);
 
