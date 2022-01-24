@@ -64,9 +64,6 @@ const Upload = () => {
                 method: 'POST',
                 body: formData,
                 credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
             }).then((res) => {
                 if (description.length > 500) {
                     setError('Description must be less than 500 characters');
