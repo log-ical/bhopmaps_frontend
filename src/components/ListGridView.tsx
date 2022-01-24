@@ -227,7 +227,7 @@ const ListGridView: React.FC<any> = ({ data }) => {
                                                         src={map.thumbnail}
                                                         alt='Map thumbnail'
                                                         rounded='md'
-                                                        width='80px'
+                                                        width='120px'
                                                     />
 
                                                     <Text color='gray.500'>
@@ -291,7 +291,7 @@ const ListGridView: React.FC<any> = ({ data }) => {
                                                     src={map.thumbnail}
                                                     alt='Map thumbnail'
                                                     rounded='md'
-                                                    width='80px'
+                                                    width='container.md'
                                                 />
                                                 <Heading
                                                     size='md'

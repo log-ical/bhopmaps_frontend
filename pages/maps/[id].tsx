@@ -41,7 +41,8 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
                     customStyle={{
                         fontSize: '16px',
                         borderRadius: '8px',
-                        padding: '10px',
+                        padding: '8px',
+                        margin: '2rem 0',
                     }}
                     style={colorMode === 'light' ? lightTheme : darkTheme}
                     language={props.className?.replace('language-', '')}
@@ -53,7 +54,7 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
         h1: (props: any) => <Heading as='h1' size='lg' {...props} />,
         h2: (props: any) => <Heading as='h2' size='md' {...props} />,
         h3: (props: any) => <Heading as='h3' size='sm' {...props} />,
-        a: (props: any) => <Button as='a' size='sm' my={2} {...props} />,
+        a: (props: any) => <Button colorScheme='yellow' as='a' size='xs' my={2} {...props} />,
     };
 
     const handleDownload = async () => {
