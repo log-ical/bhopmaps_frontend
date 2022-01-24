@@ -52,8 +52,8 @@ const Home: React.FC<any> = ({ data }) => {
     const { colorMode, toggleColorMode } = useColorMode();
 
     // Load More Button
-    const [currentPostCount, setCurrentPostCount] = React.useState(3);
-    const [showLoadMoreButton, setShowLoadMoreButton] = React.useState(false);
+    const [currentPostCount, setCurrentPostCount] = React.useState(8);
+    const [showLoadMoreButton, setShowLoadMoreButton] = React.useState(true);
     const handlePostCount = (e: any) => {
         e.preventDefault();
         let newCount = currentPostCount + 2;
@@ -97,7 +97,7 @@ const Home: React.FC<any> = ({ data }) => {
                 />
                 <meta charSet='utf-8' />
                 <meta name='Description' content={description}></meta>
-                <title>BhopMaps</title>
+                <title>Bhopmaps CSS & CSGO</title>
                 <link
                     rel='apple-touch-icon'
                     sizes='180x180'
