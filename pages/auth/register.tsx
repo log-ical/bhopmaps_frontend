@@ -47,7 +47,7 @@ const Register: React.FC<any> = ({ props: any }) => {
         const existingUser = await fetch(`${API_URL}/user/${username}`)
         const existingUserData = await existingUser.json();
 
-        if (existingUserData.username === username) {
+        if (existingUserData.userData?.username === username) {
             setError('Username already exists');
             setTimeout(() => {
                 setError('');
