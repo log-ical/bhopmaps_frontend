@@ -11,8 +11,6 @@ import {
     AlertTitle,
     AlertIcon,
     Link,
-    Spinner,
-    Select,
     RadioGroup,
     Stack,
     Radio,
@@ -24,17 +22,19 @@ import { API_URL, UserContext } from 'src/api/UserContext';
 const Upload = () => {
     const [mapName, setMapname] = React.useState('');
     const [thumbnail, setThumbnail] = React.useState('');
-    const fileInput: any = React.useRef();
     const [description, setDescription] = React.useState('');
     const [error, setError] = React.useState('');
     const [gameType, setGameType] = React.useState('CSS');
     const [success, setSuccess] = React.useState(false);
+    const fileInput: any = React.useRef();
+    const thumbnailInput: any = React.useRef();
     const [submitting, setSubmitting] = React.useState(false);
     const maxFileSize = 100000000;
-
+    const maxThumbnailSize = 1000000;
 
     const fileTypes =
         'zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed';
+    const fileTypesThumbnail = 'image/png,image/jpeg,image/jpg';
 
     const { user } = React.useContext(UserContext);
 
@@ -42,6 +42,7 @@ const Upload = () => {
         e.preventDefault();
         setSubmitting(true);
 
+        // Handling fileInput
         if (fileInput.current.files[0].size > maxFileSize) {
             setError('File size is too big');
             setSubmitting(false);
@@ -51,8 +52,25 @@ const Upload = () => {
         if (
             fileInput.current.files[0].type !== 'application/x-zip-compressed'
         ) {
-            console.log(fileInput.current.files[0].type);
             setError('File type is not zip');
+            setSubmitting(false);
+            return;
+        }
+
+        // Handling ThumbnailInput
+
+        if (thumbnailInput.current.files[0].size > maxThumbnailSize) {
+            setError('File size is too big');
+            setSubmitting(false);
+            return;
+        }
+
+        if (
+            thumbnailInput.current.files[0].type !== 'image/png' &&
+            thumbnailInput.current.files[0].type !== 'image/jpeg' &&
+            thumbnailInput.current.files[0].type !== 'image/jpg'
+        ) {
+            setError('File type is not an image');
             setSubmitting(false);
             return;
         }
@@ -61,6 +79,7 @@ const Upload = () => {
         formData.append('mapName', mapName);
         formData.append('thumbnail', thumbnail);
         formData.append('file', fileInput.current.files![0]);
+        formData.append('thumbnail', thumbnailInput.current.files![0]);
         formData.append('description', description);
         formData.append('gameType', gameType);
 
@@ -119,17 +138,7 @@ const Upload = () => {
                             onChange={(e) => setMapname(e.target.value)}
                         />
 
-                        <FormLabel htmlFor='thumbnail'>
-                            Choose thumbnail
-                        </FormLabel>
-                        <Input
-                            isDisabled={submitting}
-                            id='thumbnail'
-                            type='text'
-                            value={thumbnail}
-                            accept={fileTypes}
-                            onChange={(e) => setThumbnail(e.target.value)}
-                        />
+                        
 
                         <HStack justifyContent='space-between' w='full'>
                             <FormLabel htmlFor='description'>
@@ -153,13 +162,33 @@ const Upload = () => {
                             {description.length} / 500{' '}
                         </Text>
 
-                        <FormLabel htmlFor='file'>Choose file
+                        <FormLabel htmlFor='thumbnail'>
+                            Choose thumbnail
+                        </FormLabel>
+                        <Input
+                            isDisabled={submitting}
+                            className='thumbnail-input'
+                            id='thumbnail'
+                            type='file'
+                            ref={thumbnailInput}
+                            variant='unstyled'
+                            accept={fileTypesThumbnail}
+                        />
+                        <Text fontSize='x-small' color='gray.400'>
+                            {'\u2022'} Maxiumum file size:{' '}
+                            {maxFileSize * 10 ** -5}MB <br />
+                            {'\u2022'} Allowed file formats: jpeg, jpg, png
+                        </Text>
+
+                        <FormLabel htmlFor='file'>
+                            Choose file
                             <Text fontSize='x-small' color='gray.400'>
-                            {'\u2022'} Maxiumum file size: {maxFileSize*10**-6}MB <br />
-                            {'\u2022'} Allowed file formats: zip
+                                {'\u2022'} Maxiumum file size:{' '}
+                                {maxFileSize * 10 ** -6}MB <br />
+                                {'\u2022'} Allowed file formats: zip
                             </Text>
                         </FormLabel>
-                        
+
                         <Input
                             isDisabled={submitting}
                             className='file-input'
