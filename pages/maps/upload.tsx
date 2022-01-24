@@ -147,15 +147,6 @@ const Upload = () => {
                             onChange={(e) => setThumbnail(e.target.value)}
                         />
 
-                        <FormLabel htmlFor='file'>
-                            Choose file
-                            <Text fontSize='x-small' color='gray.400'>
-                                {'\u2022'} Maximum file size:{' '}
-                                {maxFileSize * 10 ** -6}MB <br />
-                                {'\u2022'} Allowed file formats: zip
-                            </Text>
-                        </FormLabel>
-
                         <Input
                             isDisabled={submitting}
                             className='file-input'
