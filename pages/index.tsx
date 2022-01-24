@@ -254,7 +254,7 @@ const Home: React.FC<any> = ({ data }) => {
                         ))}
                 </List>
             ) : (
-                <Grid templateColumns='repeat(2, 1fr)' gap={6}>
+                <Grid templateColumns={{base: '1fr', sm: 'repeat(2, 1fr)'}} gap={6}>
                     {maps
                         .filter((maps: any) =>
                             maps.mapName
