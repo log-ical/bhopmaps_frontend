@@ -12,7 +12,6 @@ import {
     Heading,
     Image,
     Text,
-    AspectRatio,
     ListItem,
     Button,
     Tag,
@@ -22,7 +21,7 @@ import {
     GridItem,
 } from '@chakra-ui/react';
 import { HiDownload, HiOutlineSearch } from 'react-icons/hi';
-import type { GetServerSideProps, NextPage } from 'next';
+import type { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import * as React from 'react';
 import fetch from 'node-fetch';
