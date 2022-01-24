@@ -46,7 +46,7 @@ const ListGridView: React.FC<any> = ({ data }) => {
     const description =
         'bhopmaps.com is a platform for CSS & CSGO bunnyhop maps.';
 
-    const maps = data
+    const maps = data;
     const cardBackground = useColorModeValue('gray.50', 'gray.800');
     const hoverBg = useColorModeValue('gray.200', 'gray.700');
     const { colorMode, toggleColorMode } = useColorMode();
@@ -347,6 +347,5 @@ const ListGridView: React.FC<any> = ({ data }) => {
         </>
     );
 };
-
 
 export default ListGridView;

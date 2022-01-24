@@ -19,4 +19,4 @@ export type User = {
     betaKey: string;
     createdAt: Date;
     updatedAt: Date;
-}
+};

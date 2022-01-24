@@ -80,7 +80,7 @@ const Home: React.FC<any> = ({ data }) => {
                 />
                 <link rel='manifest' href='/site.webmanifest' />
             </Head>
-            <ListGridView data={maps}/>
+            <ListGridView data={maps} />
         </>
     );
 };

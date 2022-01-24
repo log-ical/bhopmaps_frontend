@@ -7,6 +7,8 @@ import {
     HStack,
     Divider,
     Button,
+    Tag,
+    Box,
 } from '@chakra-ui/react';
 import { API_URL } from 'src/api/UserContext';
 import { GetServerSideProps } from 'next';
@@ -34,7 +36,14 @@ const Profile: React.FC<{ data: any; maps: any }> = ({ data, maps }) => {
                                 alt='Avatar'
                                 loading='eager'
                             />
-                            <Heading>{data.userData?.username}</Heading>
+                            <HStack>
+                                <Heading>{data.userData?.username}</Heading>
+                                {data.userData?.isBeta && (
+                                    <Tag size='md' colorScheme='cyan'>
+                                        Beta
+                                    </Tag>
+                                )}
+                            </HStack>
                             <HStack>
                                 <Text color='gray.500'>Registered since:</Text>
                                 <Text fontWeight='bold' color='gray.500'>
