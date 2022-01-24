@@ -60,9 +60,6 @@ const Upload = () => {
         formData.append('file', fileInput.current.files![0]);
         formData.append('gameType', gameType);
 
-        console.log(formData)
-        console.log(fileInput)
-
         try {
             fetch(`${API_URL}/map/new`, {
                 method: 'POST',
