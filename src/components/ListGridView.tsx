@@ -138,7 +138,7 @@ const ListGridView: React.FC<any> = ({ data }) => {
                     {gridButtonLabel}{' '}
                 </Button>
             </HStack>
-            {isGridView ? (
+            {!isGridView ? (
                 <List spacing={6}>
                     {maps
                         .filter((maps: any) =>

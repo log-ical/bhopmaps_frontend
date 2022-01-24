@@ -1,36 +1,8 @@
-import {
-    HStack,
-    Icon,
-    InputGroup,
-    Input,
-    InputLeftElement,
-    List,
-    VStack,
-    useColorModeValue,
-    useColorMode,
-    Stack,
-    Heading,
-    Image,
-    Text,
-    ListItem,
-    Button,
-    Tag,
-    TagLabel,
-    TagRightIcon,
-    Grid,
-    GridItem,
-} from '@chakra-ui/react';
-import { HiDownload, HiOutlineSearch } from 'react-icons/hi';
 import type { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import * as React from 'react';
 import fetch from 'node-fetch';
 import { API_URL } from 'src/api/UserContext';
-import NextLink from 'next/link';
-import { formatNumber } from 'src/utils/numberFormatter';
-
-import { BsFillGridFill, BsList } from 'react-icons/bs';
-import { createDate } from 'src/utils/createDate';
 import ListGridView from '@/src/components/ListGridView';
 
 type Map = {
