@@ -33,7 +33,7 @@ const Upload = () => {
     const maxThumbnailSize = 1000000;
 
     const fileTypes =
-        'zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed';
+        'application/x-zip,application/x-zip-compressed';
     const fileTypesThumbnail = 'image/png,image/jpeg,image/jpg';
 
     const { user } = React.useContext(UserContext);
