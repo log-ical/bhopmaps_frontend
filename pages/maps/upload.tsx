@@ -32,6 +32,7 @@ const Upload = () => {
     const [submitting, setSubmitting] = React.useState(false);
     const maxFileSize = 100000000;
 
+
     const fileTypes =
         'zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed';
 
@@ -166,8 +167,9 @@ const Upload = () => {
                             type='file'
                             ref={fileInput}
                             variant='unstyled'
-                            accept='.zip'
+                            accept={fileTypes}
                         />
+
                         <FormLabel htmlFor='gameType'>Choose game</FormLabel>
                         <RadioGroup
                             isDisabled={submitting}
