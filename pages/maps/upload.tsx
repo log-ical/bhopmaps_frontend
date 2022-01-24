@@ -62,18 +62,6 @@ const Upload = () => {
         formData.append('file', fileInput.current.files![0]);
         formData.append('gameType', gameType);
 
-        const mapName = formData.get('mapName')?.valueOf() as string;
-
-        if (mapName.length < 5 || mapName.length > 100) {
-            setError('Map name must be between 5 and 100 characters');
-            setSubmitting(false);
-            setTimeout(() => {
-                setError('');
-                }, 3000); 
-            }
-            return;
-        }
-
         try {
             fetch(`${API_URL}/map/new`, {
                 method: 'POST',
