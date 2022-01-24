@@ -24,13 +24,16 @@ import { API_URL, UserContext } from 'src/api/UserContext';
 const Upload = () => {
     const [mapName, setMapname] = React.useState('');
     const [thumbnail, setThumbnail] = React.useState('');
-    const fileInput: any = React.useRef();
     const [description, setDescription] = React.useState('');
     const [error, setError] = React.useState('');
     const [gameType, setGameType] = React.useState('CSS');
     const [success, setSuccess] = React.useState(false);
     const [submitting, setSubmitting] = React.useState(false);
     const maxFileSize = 100000000;
+    const fileInput: any = React.useRef();
+    const maxFileSizeThumbnail = 10000000;
+    const fileInputThumbnail: any = React.useRef();
+    
 
     const { user } = React.useContext(UserContext);
 
@@ -39,6 +42,12 @@ const Upload = () => {
         setSubmitting(true);
 
         if (fileInput.current.files[0].size > maxFileSize) {
+            setError('File size is too big');
+            setSubmitting(false);
+            return;
+        }
+
+        if (fileInputThumbnail.current.files[0].size > maxFileSizeThumbnail) {
             setError('File size is too big');
             setSubmitting(false);
             return;
@@ -56,12 +65,9 @@ const Upload = () => {
         const formData = new FormData();
         formData.append('mapName', mapName);
         formData.append('description', description);
-        formData.append('thumbnail', thumbnail);
+        formData.append('thumbnail', fileInputThumbnail.current.files![0]);
         formData.append('file', fileInput.current.files![0]);
         formData.append('gameType', gameType);
-
-        console.log(formData)
-        console.log(fileInput)
 
         try {
             fetch(`${API_URL}/map/new`, {
@@ -101,7 +107,12 @@ const Upload = () => {
                 }
             });
         } catch (e) {
-            return console.log(e)
+            console.log(e);
+            setError('Something went wrong');
+            setSubmitting(false);
+            setTimeout(() => {
+                setError('');
+            }, 2000);
         }
     };
 
@@ -125,9 +136,8 @@ const Upload = () => {
                         <Input
                             isDisabled={submitting}
                             id='thumbnail'
-                            type='text'
-                            value={thumbnail}
-                            onChange={(e) => setThumbnail(e.target.value)}
+                            type='file'
+                            ref={fileInputThumbnail}
                         />
 
                         <HStack justifyContent='space-between' w='full'>
