@@ -167,6 +167,11 @@ const Upload = () => {
                         <FormLabel htmlFor='thumbnail'>
                             Choose thumbnail
                         </FormLabel>
+                        <Text fontSize='x-small' color='gray.400'>
+                            {'\u2022'} Maximum file size:{' '}
+                            {maxFileSize * 10 ** -7}MB <br />
+                            {'\u2022'} Allowed file formats: jpeg, jpg, png
+                        </Text>
                         <Input
                             isDisabled={submitting}
                             className='thumbnail-input'
@@ -176,16 +181,12 @@ const Upload = () => {
                             variant='unstyled'
                             accept={fileTypesThumbnail}
                         />
-                        <Text fontSize='x-small' color='gray.400'>
-                            {'\u2022'} Maxiumum file size:{' '}
-                            {maxFileSize * 10 ** -7}MB <br />
-                            {'\u2022'} Allowed file formats: jpeg, jpg, png
-                        </Text>
+                        
 
                         <FormLabel htmlFor='file'>
                             Choose file
                             <Text fontSize='x-small' color='gray.400'>
-                                {'\u2022'} Maxiumum file size:{' '}
+                                {'\u2022'} Maximum file size:{' '}
                                 {maxFileSize * 10 ** -6}MB <br />
                                 {'\u2022'} Allowed file formats: zip
                             </Text>
