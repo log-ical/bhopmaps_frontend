@@ -88,6 +88,9 @@ const Upload = () => {
                 method: 'POST',
                 body: formData,
                 credentials: 'include',
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
             }).then((res) => {
                 if (description.length > 500) {
                     setError('Description must be less than 500 characters');
