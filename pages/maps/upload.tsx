@@ -130,7 +130,6 @@ const Upload = () => {
                             id='thumbnail'
                             type='text'
                             value={thumbnail}
-                            accept={fileTypes}
                             onChange={(e) => setThumbnail(e.target.value)}
                         />
 
