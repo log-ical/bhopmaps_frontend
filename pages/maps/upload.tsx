@@ -30,6 +30,7 @@ const Upload = () => {
     const [gameType, setGameType] = React.useState('CSS');
     const [success, setSuccess] = React.useState(false);
     const [submitting, setSubmitting] = React.useState(false);
+    const maxFileSize = 100000000;
 
     const fileTypes =
         'zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed';
@@ -40,7 +41,7 @@ const Upload = () => {
         e.preventDefault();
         setSubmitting(true);
 
-        if (fileInput.current.files[0].size > 100000000) {
+        if (fileInput.current.files[0].size > maxFileSize) {
             setError('File size is too big');
             setSubmitting(false);
             return;
@@ -151,7 +152,13 @@ const Upload = () => {
                             {description.length} / 500{' '}
                         </Text>
 
-                        <FormLabel htmlFor='file'>Choose file</FormLabel>
+                        <FormLabel htmlFor='file'>Choose file
+                            <Text fontSize='x-small' color='gray.400'>
+                            {'\u2022'} Maxiumum file size: {maxFileSize*10**-6}MB <br />
+                            {'\u2022'} Allowed file formats: zip
+                            </Text>
+                        </FormLabel>
+                        
                         <Input
                             isDisabled={submitting}
                             className='file-input'
