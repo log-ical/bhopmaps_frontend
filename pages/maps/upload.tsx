@@ -47,7 +47,6 @@ const Upload = () => {
         if (
             fileInput.current.files[0].type !== 'application/x-zip-compressed'
         ) {
-            console.log(fileInput.current.files[0].type);
             setError('File type is not zip');
             setSubmitting(false);
             return;
@@ -97,7 +96,7 @@ const Upload = () => {
                 }
             });
         } catch (e) {
-            return;
+            return console.log(e)
         }
     };
 
