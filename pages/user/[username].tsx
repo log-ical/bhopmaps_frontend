@@ -28,7 +28,7 @@ import config from '../../config.json';
 import NextLink from 'next/link';
 import { createDate } from 'src/utils/createDate';
 import { formatNumber } from 'src/utils/numberFormatter';
-import { Map } from 'src/api/types';
+import { Map, User } from 'src/api/types';
 
 const Profile: React.FC<{ data: any; maps: any }> = ({ data, maps }) => {
     const cardBackground = useColorModeValue('gray.50', 'gray.800');

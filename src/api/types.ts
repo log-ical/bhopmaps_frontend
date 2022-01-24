@@ -10,3 +10,13 @@ export type Map = {
     createdAt: Date;
     updatedAt: Date;
 };
+
+export type User = {
+    id: string;
+    username: string;
+    avatar: string;
+    isBeta: boolean;
+    betaKey: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
