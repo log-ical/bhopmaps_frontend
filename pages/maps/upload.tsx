@@ -27,14 +27,10 @@ const Upload = () => {
     const [gameType, setGameType] = React.useState('CSS');
     const [success, setSuccess] = React.useState(false);
     const fileInput: any = React.useRef();
-    const thumbnailInput: any = React.useRef();
     const [submitting, setSubmitting] = React.useState(false);
     const maxFileSize = 100000000;
-    const maxThumbnailSize = 1000000;
 
-    const fileTypes =
-        'application/x-zip,application/x-zip-compressed';
-    const fileTypesThumbnail = 'image/png,image/jpeg,image/jpg';
+    const fileTypes = 'application/x-zip,application/x-zip-compressed';
 
     const { user } = React.useContext(UserContext);
 
@@ -57,31 +53,11 @@ const Upload = () => {
             return;
         }
 
-        // Handling ThumbnailInput
-
-        if (thumbnailInput.current.files[0].size > maxThumbnailSize) {
-            setError('File size is too big');
-            setSubmitting(false);
-            return;
-        }
-
-        if (
-            thumbnailInput.current.files[0].type !== 'image/png' &&
-            thumbnailInput.current.files[0].type !== 'image/jpeg' &&
-            thumbnailInput.current.files[0].type !== 'image/jpg'
-        ) {
-            setError('File type is not an image');
-            setSubmitting(false);
-            return;
-        }
-
-
-
         const formData = new FormData();
         formData.append('mapName', mapName);
         formData.append('thumbnail', thumbnail);
         formData.append('file', fileInput.current.files![0]);
-        formData.append('thumbnail', thumbnailInput.current.files![0]);
+        formData.append('thumbnail', thumbnail);
         formData.append('description', description);
         formData.append('gameType', gameType);
 
@@ -140,8 +116,6 @@ const Upload = () => {
                             onChange={(e) => setMapname(e.target.value)}
                         />
 
-                        
-
                         <HStack justifyContent='space-between' w='full'>
                             <FormLabel htmlFor='description'>
                                 Description
@@ -167,21 +141,15 @@ const Upload = () => {
                         <FormLabel htmlFor='thumbnail'>
                             Choose thumbnail
                         </FormLabel>
-                        <Text fontSize='x-small' color='gray.400'>
-                            {'\u2022'} Maximum file size:{' '}
-                            {maxFileSize * 10 ** -7}MB <br />
-                            {'\u2022'} Allowed file formats: jpeg, jpg, png
-                        </Text>
                         <Input
                             isDisabled={submitting}
                             className='thumbnail-input'
                             id='thumbnail'
-                            type='file'
-                            ref={thumbnailInput}
+                            type='text'
+                            value={thumbnail}
+                            onChange={(e) => setThumbnail(e.target.value)}
                             variant='unstyled'
-                            accept={fileTypesThumbnail}
                         />
-                        
 
                         <FormLabel htmlFor='file'>
                             Choose file
