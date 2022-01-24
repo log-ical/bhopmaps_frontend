@@ -143,12 +143,11 @@ const Upload = () => {
                         </FormLabel>
                         <Input
                             isDisabled={submitting}
-                            className='thumbnail-input'
                             id='thumbnail'
                             type='text'
                             value={thumbnail}
+                            accept={fileTypes}
                             onChange={(e) => setThumbnail(e.target.value)}
-                            variant='unstyled'
                         />
 
                         <FormLabel htmlFor='file'>
