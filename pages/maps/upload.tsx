@@ -30,7 +30,7 @@ const Upload = () => {
     const maxFileSize = 100000000;
 
     const thumbnailInput: any = React.useRef();
-    const maxThumbnailSize = 1000000;
+    const maxThumbnailSize = 5000000;
 
     const { user } = React.useContext(UserContext);
 
