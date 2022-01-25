@@ -94,7 +94,7 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
         <>
         <NextSeo
         title={`${map.mapName} - Bunnyhop Map`}
-        description={`Published by ${map.author.username} on ${createDate(map.createdAt)}`}
+        description={`Published by ${map.author} on ${createDate(map.createdAt)}`}
         openGraph={{
             title: `${map.mapName} - Bunnyhop Map`,
             description: `Published by ${map.author.username} on ${createDate(map.createdAt)}`,
