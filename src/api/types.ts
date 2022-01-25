@@ -4,6 +4,7 @@ export type Map = {
     authorId: string;
     mapName: string;
     thumbnail: string;
+    bhopmapsUrl: string;
     downloads: number;
     description: string;
     gameType: string;

@@ -31,9 +31,10 @@ import config from '../../config.json';
 import { Map } from 'src/api/types';
 
 const ListGridView: React.FC<any> = ({ data }) => {
-    const description = config.description;
 
     const maps = data;
+    const description = config.description;
+
     const cardBackground = useColorModeValue('gray.50', 'gray.800');
     const hoverBg = useColorModeValue('gray.200', 'gray.700');
     const { colorMode, toggleColorMode } = useColorMode();

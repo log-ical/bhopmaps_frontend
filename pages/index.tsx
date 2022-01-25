@@ -66,9 +66,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
     });
     const data: any = await result.json();
 
-    if (!data) {
-        return { props: { data: [] } };
-    }
 
     return {
         props: {

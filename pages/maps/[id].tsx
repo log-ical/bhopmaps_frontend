@@ -23,9 +23,10 @@ import lightTheme from 'react-syntax-highlighter/dist/esm/styles/prism/base16-at
 import ReactMarkdown from 'react-markdown';
 import NextLink from 'next/link';
 import { createDate } from 'src/utils/createDate';
-import Router, { useRouter } from 'next/router';
+import Router from 'next/router';
 import { HiDownload } from 'react-icons/hi';
 import { formatNumber } from 'src/utils/numberFormatter';
+import DynamicAlert from '../../src/components/DynamicAlert';
 
 const Map: React.FC<{ data: any }> = ({ data }) => {
     const { map } = data;
@@ -54,7 +55,9 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
         h1: (props: any) => <Heading as='h1' size='lg' {...props} />,
         h2: (props: any) => <Heading as='h2' size='md' {...props} />,
         h3: (props: any) => <Heading as='h3' size='sm' {...props} />,
-        a: (props: any) => <Button colorScheme='yellow' as='a' size='xs' my={2} {...props} />,
+        a: (props: any) => (
+            <Button colorScheme='yellow' as='a' size='xs' my={2} {...props} />
+        ),
     };
 
     const handleDownload = async () => {
@@ -123,6 +126,17 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
                                 <VStack alignItems='flex-start'>
                                     <Heading>{map.mapName}</Heading>
                                     <HStack>
+                                        <Text color='gray.500'>
+                                            Published on
+                                        </Text>
+                                        <Text
+                                            color='gray.500'
+                                            fontWeight='bold'
+                                        >
+                                            {createDate(map.createdAt)}
+                                        </Text>
+                                    </HStack>
+                                    <HStack>
                                         <Tag colorScheme='cyan'>
                                             <TagLabel>
                                                 {formatNumber(map.downloads)}
@@ -165,12 +179,6 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
                         </Stack>
                         <VStack alignItems='flex-start'>
                             <HStack>
-                                <Text color='gray.500'>Published on</Text>
-                                <Text color='gray.500' fontWeight='bold'>
-                                    {createDate(map.createdAt)}
-                                </Text>
-                            </HStack>
-                            <HStack>
                                 <Text color='gray.500'>by</Text>
                                 <Link
                                     fontWeight='bold'
@@ -181,10 +189,11 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
                                     {map.author}
                                 </Link>
                             </HStack>
+
                             <Image
                                 src={map.thumbnail}
                                 alt='Map thumbnail'
-                                width='full'
+                                width='lg'
                                 rounded='lg'
                             />
                         </VStack>
@@ -214,11 +223,12 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
                                 Download map
                             </Button>
                         </HStack>
-                        {error && (
-                            <Box>
-                                <Text color='red.500'>{error}</Text>
-                            </Box>
-                        )}
+
+                        <DynamicAlert
+                            status='error'
+                            message={error}
+                            showAlert={error ? true : false}
+                        />
                     </VStack>
                 </Box>
             ) : (
