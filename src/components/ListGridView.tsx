@@ -39,7 +39,7 @@ const ListGridView: React.FC<any> = ({ data }) => {
     const { colorMode, toggleColorMode } = useColorMode();
 
     const [isListView, setView] = React.useState(true);
-    const [gridButtonLabel, setGridButtonLabel] = React.useState('List View');
+    const [gridButtonLabel, setGridButtonLabel] = React.useState('Grid View');
     const [gridButtonIcon, setGridButtonIcon] = React.useState(<BsList />);
 
     const handleGridView = () => {
