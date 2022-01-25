@@ -6,6 +6,7 @@ import { API_URL } from 'src/api/UserContext';
 import ListGridView from '@/src/components/ListGridView';
 import { Heading } from '@chakra-ui/react';
 import UserSearch from '@/src/components/UserSearch';
+import { NextSeo } from 'next-seo';
 
 type Map = {
     id: string;
@@ -22,7 +23,7 @@ type Map = {
 
 const Home: React.FC<any> = ({ data, users }) => {
     const description =
-        'bhopmaps.com is a platform for CSS & CSGO bunnyhop maps.';
+        'Bhopmaps is a site where you can find, share and download maps for the game CSS & CSGO.';
     const maps = data;
 
     return (
@@ -54,6 +55,19 @@ const Home: React.FC<any> = ({ data, users }) => {
                 />
                 <link rel='manifest' href='/site.webmanifest' />
             </Head>
+            <NextSeo
+                title={`Bhopmaps CSS & CSGO`}
+                description={description}
+                openGraph={{
+                    title: `Bhopmaps CSS & CSGO`,
+                    images: [
+                        {
+                            url: `https://bhopmaps.s3.eu-central-1.amazonaws.com/bhopmaps_dark.png`,
+                        },
+                    ],
+                    site_name: 'www.bhopmaps.app',
+                }}
+            />
 
             <Heading>Maps</Heading>
             <ListGridView data={maps} />
