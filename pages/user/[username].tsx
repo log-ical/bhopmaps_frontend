@@ -8,7 +8,6 @@ import {
     Divider,
     Button,
     Tag,
-    Box,
 } from '@chakra-ui/react';
 import { API_URL } from 'src/api/UserContext';
 import { GetServerSideProps } from 'next';
@@ -17,10 +16,24 @@ import config from '../../config.json';
 import NextLink from 'next/link';
 import { createDate } from 'src/utils/createDate';
 import ListGridView from '@/src/components/ListGridView';
+import { NextSeo } from 'next-seo';
 
 const Profile: React.FC<{ data: any; maps: any }> = ({ data, maps }) => {
     return (
         <>
+        <NextSeo
+        title={`${data.userData?.username} - Profile`}
+        description='Profile page'
+        openGraph={{
+            title: `${data.userData?.username} - Profile`,
+            images: [
+                {
+                    url: `${data.userData?.avatar}`
+                }
+            ],
+            site_name: 'bhopmaps.app',
+        }}
+        />
             {data.statusCode != 400 ? (
                 <>
                     <VStack spacing={8} alignItems='flex-start'>
