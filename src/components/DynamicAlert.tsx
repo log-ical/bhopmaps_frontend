@@ -6,8 +6,7 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 
-const DynamicAlert: React.FC<any> = ({status, message, showAlert}) => {
-
+const DynamicAlert: React.FC<any> = ({ status, message, showAlert }) => {
     return (
         <>
             {showAlert ? (

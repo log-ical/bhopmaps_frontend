@@ -29,7 +29,7 @@ const Upload = () => {
     const fileInput: any = React.useRef();
     const maxFileSize = 100000000;
 
-    const thumbnailInput: any = React.useRef()
+    const thumbnailInput: any = React.useRef();
     const maxThumbnailSize = 1000000;
 
     const { user } = React.useContext(UserContext);
@@ -58,9 +58,7 @@ const Upload = () => {
             return;
         }
 
-        if (
-            thumbnailInput.current.files[0].type !== 'image/png'
-        ) {
+        if (thumbnailInput.current.files[0].type !== 'image/png') {
             setError('File type is not zip');
             setSubmitting(false);
             return;

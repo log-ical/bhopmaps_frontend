@@ -126,7 +126,6 @@ const ListGridView: React.FC<any> = ({ data }) => {
                 <Button leftIcon={gridButtonIcon} onClick={handleGridView}>
                     {gridButtonLabel}
                 </Button>
-                
             </HStack>
             {isListView ? (
                 <List spacing={6}>

@@ -47,8 +47,13 @@ const UserSearch: React.FC<any> = ({ data }) => {
                     </InputLeftElement>
                 </InputGroup>
             </HStack>
-            <Grid templateColumns={{ base: 'repeat(2, 1fr)', sm: 'repeat(5, 1fr)' }}
-                    gap={6}>
+            <Grid
+                templateColumns={{
+                    base: 'repeat(2, 1fr)',
+                    sm: 'repeat(5, 1fr)',
+                }}
+                gap={6}
+            >
                 {users
                     .filter((users: any) =>
                         users.username
@@ -58,21 +63,22 @@ const UserSearch: React.FC<any> = ({ data }) => {
                     .map((user: User) => (
                         <GridItem key={user.username}>
                             <NextLink href={`/user/${user.username}`}>
-                            <VStack
-                            w='full'
-                            p={4}
-                            rounded='md'
-                            transitionProperty='all'
-                            transitionDuration='slow'
-                            transitionTimingFunction='ease-out'
-                            _hover={{
-                                bg: hoverBg,
-                                transform: 'scale(1.1, 1.025)',
-                            }}
-                            cursor='pointer'>
-                                <Avatar src={user.avatar} />
-                                <Text>{user.username}</Text>
-                            </VStack>
+                                <VStack
+                                    w='full'
+                                    p={4}
+                                    rounded='md'
+                                    transitionProperty='all'
+                                    transitionDuration='slow'
+                                    transitionTimingFunction='ease-out'
+                                    _hover={{
+                                        bg: hoverBg,
+                                        transform: 'scale(1.1, 1.025)',
+                                    }}
+                                    cursor='pointer'
+                                >
+                                    <Avatar src={user.avatar} />
+                                    <Text>{user.username}</Text>
+                                </VStack>
                             </NextLink>
                         </GridItem>
                     ))}

@@ -21,7 +21,9 @@ const Footer: React.FC<any> = ({ props: any }) => {
                     height={32}
                 />
                 <Text fontWeight='bold'>© 2022 bhopmaps</Text>
-                <Button size='sm' onClick={handleRouteSearchUser}>Search users</Button>
+                <Button size='sm' onClick={handleRouteSearchUser}>
+                    Search users
+                </Button>
             </HStack>
         </>
     );

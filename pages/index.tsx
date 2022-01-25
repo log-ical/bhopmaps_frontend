@@ -57,7 +57,6 @@ const Home: React.FC<any> = ({ data, users }) => {
 
             <Heading>Maps</Heading>
             <ListGridView data={maps} />
-
         </>
     );
 };
