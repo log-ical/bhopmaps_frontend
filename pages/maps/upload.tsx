@@ -40,6 +40,12 @@ const Upload = () => {
         e.preventDefault();
         setSubmitting(true);
 
+        if (mapName === '' || description === '') {
+            setError('Please fill in all fields');
+            setSubmitting(false);
+            return;
+        }
+
         if (fileInput.current.files[0].size > maxFileSize) {
             setError('File size is too big');
             setSubmitting(false);
