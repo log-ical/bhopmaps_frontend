@@ -24,8 +24,11 @@ const Upload = () => {
     const [gameType, setGameType] = React.useState('CSS');
     const [success, setSuccess] = React.useState(false);
     const [submitting, setSubmitting] = React.useState(false);
+
+    // Handling File input
     const fileInput: any = React.useRef();
     const maxFileSize = 100000000;
+
     const thumbnailInput: any = React.useRef()
     const maxThumbnailSize = 1000000;
 
@@ -41,10 +44,23 @@ const Upload = () => {
             return;
         }
 
+        if (thumbnailInput.current.files[0].size > maxThumbnailSize) {
+            setError('File size is too big for thumbnail');
+            setSubmitting(false);
+            return;
+        }
+
         if (
             fileInput.current.files[0].type !== 'application/x-zip-compressed'
         ) {
-            console.log(fileInput.current.files[0].type);
+            setError('File type is not zip');
+            setSubmitting(false);
+            return;
+        }
+
+        if (
+            thumbnailInput.current.files[0].type !== 'image/png'
+        ) {
             setError('File type is not zip');
             setSubmitting(false);
             return;
