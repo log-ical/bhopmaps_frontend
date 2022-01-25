@@ -32,6 +32,8 @@ const Upload = () => {
     const thumbnailInput: any = React.useRef();
     const maxThumbnailSize = 5000000;
 
+    const zipFileTypes = ['application/zip', 'application/x-zip-compressed'];
+
     const { user } = React.useContext(UserContext);
 
     const handleSubmit = (e: any) => {
@@ -50,11 +52,10 @@ const Upload = () => {
             return;
         }
 
-        if (
-            fileInput.current.files[0].type !== 'application/zip'
-        ) {
-            setError('File type is not zip');
+        if (!zipFileTypes.includes(fileInput.current.files[0].type)) {
+            setError('File type is not supported');
             setSubmitting(false);
+
             return;
         }
 
@@ -142,7 +143,11 @@ const Upload = () => {
                             <FormLabel htmlFor='description'>
                                 Description
                             </FormLabel>
-                            <Link href='https://www.markdownguide.org/basic-syntax/' fontSize={11} color='gray.500'>
+                            <Link
+                                href='https://www.markdownguide.org/basic-syntax/'
+                                fontSize={11}
+                                color='gray.500'
+                            >
                                 MARKDOWN SUPPORTED
                             </Link>
                         </HStack>
@@ -168,7 +173,7 @@ const Upload = () => {
                             type='file'
                             ref={fileInput}
                             variant='unstyled'
-                            accept='.zip'
+                            accept={zipFileTypes.join(',')}
                         />
                         <FormLabel htmlFor='gameType'>Choose game</FormLabel>
                         <RadioGroup
