@@ -1,3 +1,4 @@
+import DynamicAlert from '@/src/components/DynamicAlert';
 import {
     FormControl,
     FormLabel,
@@ -44,7 +45,7 @@ const Register: React.FC<any> = ({ props: any }) => {
             return;
         }
 
-        const existingUser = await fetch(`${API_URL}/user/${username}`)
+        const existingUser = await fetch(`${API_URL}/user/${username}`);
         const existingUserData = await existingUser.json();
 
         if (existingUserData.userData?.username === username) {
@@ -67,27 +68,19 @@ const Register: React.FC<any> = ({ props: any }) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-API-KEY': `${key}`,
             },
             body: JSON.stringify({
                 username,
                 password,
             }),
         }).then((response) => {
-            if (response.status === 401) {
-                setError('You have to provide an API-KEY');
-                setTimeout(() => {
-                    setError('');
-                }, 3000);
-                return;
-            } else {
-                setSuccess(true);
-                setTimeout(() => {
-                    setSuccess(false);
-                    setError('');
-                    Router.push('/auth/login');
-                }, 2000);
-            }
+            setSuccess(true);
+            setTimeout(() => {
+                setSuccess(false);
+                setError('');
+                Router.push('/auth/login');
+            }, 2000);
+
             return response.json();
         });
     };
@@ -152,21 +145,11 @@ const Register: React.FC<any> = ({ props: any }) => {
                             </HStack>
                         </HStack>
 
-                        {success && (
-                            <Alert
-                                status='success'
-                                rounded='md'
-                                variant='subtle'
-                            >
-                                <AlertIcon />
-                                <AlertTitle mr={2} fontSize='lg'>
-                                    Success
-                                </AlertTitle>
-                                <AlertDescription>
-                                    You have successfully registered an account.
-                                </AlertDescription>
-                            </Alert>
-                        )}
+                        <DynamicAlert
+                            status='success'
+                            message='Successfully registered account'
+                            showAlert={success ? true : false}
+                        />
                     </VStack>
                 </FormControl>
             </VStack>

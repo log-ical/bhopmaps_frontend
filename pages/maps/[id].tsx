@@ -64,9 +64,6 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
         setLoading(true);
         const res = await fetch(`${API_URL}/map/${map.id}/download`, {
             method: 'PUT',
-            headers: {
-                'x-api-key': `${user?.betaKey}`,
-            },
         });
 
         if (!user) {
