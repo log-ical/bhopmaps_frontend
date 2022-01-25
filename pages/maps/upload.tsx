@@ -178,10 +178,10 @@ const Upload = () => {
                             variant='unstyled'
                             accept={zipFileTypes.join(',')}
                         />
-                        <FormLabel htmlFor='gameType'>Choose game</FormLabel>
                         <Text fontSize='xs'>
                             Supported file types: .zip
                         </Text>
+                        <FormLabel htmlFor='gameType'>Choose game</FormLabel>
                         <RadioGroup
                             isDisabled={submitting}
                             onChange={setGameType}
