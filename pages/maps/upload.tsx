@@ -138,6 +138,9 @@ const Upload = () => {
                             variant='unstyled'
                             accept='image/png'
                         />
+                        <Text fontSize='xs'>
+                            Supported file types: .png
+                        </Text>
 
                         <HStack justifyContent='space-between' w='full'>
                             <FormLabel htmlFor='description'>
@@ -176,6 +179,9 @@ const Upload = () => {
                             accept={zipFileTypes.join(',')}
                         />
                         <FormLabel htmlFor='gameType'>Choose game</FormLabel>
+                        <Text fontSize='xs'>
+                            Supported file types: .zip
+                        </Text>
                         <RadioGroup
                             isDisabled={submitting}
                             onChange={setGameType}
