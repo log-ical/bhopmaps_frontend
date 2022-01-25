@@ -49,10 +49,17 @@ const ListGridView: React.FC<any> = ({ data }) => {
         setView(!isListView);
         setGridButtonIcon(isListView ? <BsList /> : <BsFillGridFill />);
     };
-
+    
     // Load More Button
+    const drawLoadMoreButton = () => {
+        if (currentPostCount >= maps.length)
+            return false;
+        return true;
+    }
+
     const [currentPostCount, setCurrentPostCount] = React.useState(8);
-    const [showLoadMoreButton, setShowLoadMoreButton] = React.useState(true);
+    const [showLoadMoreButton, setShowLoadMoreButton] = React.useState(drawLoadMoreButton());
+
     const handlePostCount = (e: any) => {
         e.preventDefault();
         let newCount = currentPostCount + 2;
