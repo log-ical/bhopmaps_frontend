@@ -72,7 +72,7 @@ const UserSearch: React.FC<any> = ({ data }) => {
                                     transitionTimingFunction='ease-out'
                                     _hover={{
                                         bg: hoverBg,
-                                        transform: 'scale(1.1, 1.025)',
+                                        transform: 'scale(1.1, 1.1)',
                                     }}
                                     cursor='pointer'
                                 >
