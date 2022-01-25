@@ -28,7 +28,6 @@ import {
     Input,
     Alert,
     AlertIcon,
-    AlertTitle,
     AlertDescription,
     AlertDialog,
     AlertDialogOverlay,
@@ -36,7 +35,6 @@ import {
     AlertDialogHeader,
     AlertDialogBody,
     AlertDialogFooter,
-    Divider,
 } from '@chakra-ui/react';
 import LogoDark from '../../../public/logo_dark.svg';
 import LogoLight from '../../../public/logo_light.svg';

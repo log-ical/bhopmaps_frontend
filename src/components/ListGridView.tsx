@@ -19,6 +19,7 @@ import {
     TagRightIcon,
     Grid,
     GridItem,
+    Divider,
 } from '@chakra-ui/react';
 import { HiDownload, HiOutlineSearch } from 'react-icons/hi';
 import Head from 'next/head';
@@ -29,9 +30,9 @@ import { BsFillGridFill, BsList } from 'react-icons/bs';
 import { createDate } from 'src/utils/createDate';
 import config from '../../config.json';
 import { Map } from 'src/api/types';
+import Router from 'next/router';
 
 const ListGridView: React.FC<any> = ({ data }) => {
-
     const maps = data;
     const description = config.description;
 
@@ -125,6 +126,7 @@ const ListGridView: React.FC<any> = ({ data }) => {
                 <Button leftIcon={gridButtonIcon} onClick={handleGridView}>
                     {gridButtonLabel}
                 </Button>
+                
             </HStack>
             {isListView ? (
                 <List spacing={6}>
@@ -328,9 +330,12 @@ const ListGridView: React.FC<any> = ({ data }) => {
                 </Grid>
             )}
             {showLoadMoreButton && (
-                <Button variant='ghost' onClick={handlePostCount}>
-                    Load more
-                </Button>
+                <>
+                    <Button variant='ghost' onClick={handlePostCount}>
+                        Load more
+                    </Button>
+                    <Divider />
+                </>
             )}
         </>
     );

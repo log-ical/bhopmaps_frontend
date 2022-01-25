@@ -4,6 +4,8 @@ import * as React from 'react';
 import fetch from 'node-fetch';
 import { API_URL } from 'src/api/UserContext';
 import ListGridView from '@/src/components/ListGridView';
+import { Heading } from '@chakra-ui/react';
+import UserSearch from '@/src/components/UserSearch';
 
 type Map = {
     id: string;
@@ -18,7 +20,7 @@ type Map = {
     updatedAt: Date;
 };
 
-const Home: React.FC<any> = ({ data }) => {
+const Home: React.FC<any> = ({ data, users }) => {
     const description =
         'bhopmaps.com is a platform for CSS & CSGO bunnyhop maps.';
     const maps = data;
@@ -52,7 +54,10 @@ const Home: React.FC<any> = ({ data }) => {
                 />
                 <link rel='manifest' href='/site.webmanifest' />
             </Head>
+
+            <Heading>Maps</Heading>
             <ListGridView data={maps} />
+
         </>
     );
 };
@@ -65,8 +70,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
         },
     });
     const data: any = await result.json();
-
-
     return {
         props: {
             data,
