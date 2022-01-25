@@ -44,6 +44,7 @@ import NextImage from 'next/image';
 
 import { IoChevronDown, IoMoon, IoSunny } from 'react-icons/io5';
 import { AiFillPlusCircle, AiFillHome, AiOutlineLogout } from 'react-icons/ai';
+import { BsDiscord } from 'react-icons/bs';
 import { FaUserAlt } from 'react-icons/fa';
 import { IoMdSettings } from 'react-icons/io';
 import { UserContext, API_URL } from 'src/api/UserContext';
@@ -105,6 +106,10 @@ const Header: React.FC<any> = ({ props: any }) => {
 
     const handleNewMap = () => {
         Router.push('/maps/upload');
+    };
+
+    const handleDiscord = () => {
+        Router.push('https://discord.gg/h4Jemkm35Q');
     };
 
     const handleEditUser = () => {
@@ -218,6 +223,12 @@ const Header: React.FC<any> = ({ props: any }) => {
                                         onClick={onOpen}
                                     >
                                         Settings
+                                    </MenuItem>
+                                    <MenuItem
+                                        icon={<BsDiscord />}
+                                        onClick={handleDiscord}
+                                    >
+                                        Get help
                                     </MenuItem>
                                     <MenuItem
                                         icon={<AiOutlineLogout />}
