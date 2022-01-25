@@ -179,7 +179,7 @@ const Upload = () => {
                         <DynamicAlert
                             status='error'
                             message={error}
-                            showAlert={error ? true : false}
+                            showAlert={error != '' ? true : false}
                         />
                         <DynamicAlert
                             status='success'

@@ -13,9 +13,6 @@ const DynamicAlert: React.FC<any> = ({status, message, showAlert}) => {
             {showAlert ? (
                 <Alert status={status} rounded='md'>
                     <AlertIcon />
-                    <AlertTitle mr={2}>
-                        Error
-                    </AlertTitle>
                     <AlertDescription>{message}</AlertDescription>
                 </Alert>
             ) : (
