@@ -27,6 +27,7 @@ import Router from 'next/router';
 import { HiDownload } from 'react-icons/hi';
 import { formatNumber } from 'src/utils/numberFormatter';
 import DynamicAlert from '../../src/components/DynamicAlert';
+import { NextSeo } from 'next-seo';
 
 const Map: React.FC<{ data: any }> = ({ data }) => {
     const { map } = data;
@@ -91,6 +92,20 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
 
     return (
         <>
+        <NextSeo
+        title={`${map.title} - Bunnyhop Map`}
+        description={`Published by ${map.author.username} on ${createDate(map.createdAt)}`}
+        openGraph={{
+            title: `${map.title} - Bunnyhop Map`,
+            description: `Published by ${map.author.username} on ${createDate(map.createdAt)}`,
+            images: [
+                {
+                    url: `${map.thumbnail}`
+                }
+            ],
+            site_name: 'bhopmaps.app',
+        }}
+        />
             {data.statusCode != 400 ? (
                 <Box alignItems='flex-start'>
                     <VStack alignItems='flex-start'>
