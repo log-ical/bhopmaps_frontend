@@ -78,7 +78,7 @@ const Upload = () => {
                 credentials: 'include',
             }).then((res) => {
                 if (description.length > 1000) {
-                    setError('Description must be less than 500 characters');
+                    setError('Description must be less than 1000 characters');
                     setSubmitting(false);
                     setTimeout(() => {
                         setError('');
