@@ -66,18 +66,6 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
             method: 'PUT',
         });
 
-        if (!user) {
-            setError('You must be a beta user to download maps');
-            setLoading(false);
-            return;
-        }
-
-        if (!user.isBeta) {
-            setError('You must be a beta user to download maps');
-            setLoading(false);
-            return;
-        }
-
         const downloadUrl = await res.json();
         Router.push(downloadUrl.url);
         setLoading(false);
