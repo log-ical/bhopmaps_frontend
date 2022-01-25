@@ -51,7 +51,7 @@ const Upload = () => {
         }
 
         if (
-            fileInput.current.files[0].type !== 'application/x-zip-compressed'
+            fileInput.current.files[0].type !== 'application/zip'
         ) {
             setError('File type is not zip');
             setSubmitting(false);
@@ -59,7 +59,7 @@ const Upload = () => {
         }
 
         if (thumbnailInput.current.files[0].type !== 'image/png') {
-            setError('File type is not zip');
+            setError('File type is not png');
             setSubmitting(false);
             return;
         }
@@ -142,9 +142,9 @@ const Upload = () => {
                             <FormLabel htmlFor='description'>
                                 Description
                             </FormLabel>
-                            <Text fontSize={11} color='gray.500'>
+                            <Link href='https://www.markdownguide.org/basic-syntax/' fontSize={11} color='gray.500'>
                                 MARKDOWN SUPPORTED
-                            </Text>
+                            </Link>
                         </HStack>
                         <Textarea
                             id='description'
