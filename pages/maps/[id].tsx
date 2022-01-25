@@ -92,20 +92,24 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
 
     return (
         <>
-        <NextSeo
-        title={`${map.mapName} - Bunnyhop Map`}
-        description={`Published by ${map.author} on ${createDate(map.createdAt)}`}
-        openGraph={{
-            title: `${map.mapName} - Bunnyhop Map`,
-            description: `Published by ${map.author.username} on ${createDate(map.createdAt)}`,
-            images: [
-                {
-                    url: `${map.thumbnail}`
-                }
-            ],
-            site_name: 'bhopmaps.app',
-        }}
-        />
+            <NextSeo
+                title={`${map.mapName} - Bunnyhop Map`}
+                description={`Published by ${map.author} on ${createDate(
+                    map.createdAt
+                )}`}
+                openGraph={{
+                    title: `${map.mapName} - Bunnyhop Map`,
+                    description: `Published by ${map.author} on ${createDate(
+                        map.createdAt
+                    )}`,
+                    images: [
+                        {
+                            url: `${map.thumbnail}`,
+                        },
+                    ],
+                    site_name: 'www.bhopmaps.app',
+                }}
+            />
             {data.statusCode != 400 ? (
                 <Box alignItems='flex-start'>
                     <VStack alignItems='flex-start'>

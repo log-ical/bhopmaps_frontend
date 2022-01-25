@@ -21,19 +21,19 @@ import { NextSeo } from 'next-seo';
 const Profile: React.FC<{ data: any; maps: any }> = ({ data, maps }) => {
     return (
         <>
-        <NextSeo
-        title={`${data.userData?.username} - Profile`}
-        description='Profile page'
-        openGraph={{
-            title: `${data.userData?.username} - Profile`,
-            images: [
-                {
-                    url: `${data.userData?.avatar}`
-                }
-            ],
-            site_name: 'bhopmaps.app',
-        }}
-        />
+            <NextSeo
+                title={`${data.userData?.username} - Profile`}
+                description='Profile page'
+                openGraph={{
+                    title: `${data.userData?.username}`,
+                    images: [
+                        {
+                            url: `${data.userData?.avatar}`,
+                        },
+                    ],
+                    site_name: 'www.bhopmaps.app',
+                }}
+            />
             {data.statusCode != 400 ? (
                 <>
                     <VStack spacing={8} alignItems='flex-start'>
