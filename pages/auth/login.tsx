@@ -8,15 +8,12 @@ import {
     Button,
     VStack,
     Text,
-    Alert,
-    AlertIcon,
-    AlertTitle,
-    AlertDescription,
     HStack,
     Link,
 } from '@chakra-ui/react';
 import Router from 'next/router';
 import { API_URL, UserContext } from 'src/api/UserContext';
+import DynamicAlert from '@/src/components/DynamicAlert';
 
 const Login = () => {
     const [username, setUsername] = React.useState('');
@@ -89,13 +86,16 @@ const Login = () => {
                     <Text color='gray.500'>Please enter your details</Text>
                 </VStack>
 
-                {error && (
-                    <Alert status='error' rounded='md'>
-                        <AlertIcon />
-                        <AlertTitle mr={2}>Error</AlertTitle>
-                        <AlertDescription>{error}</AlertDescription>
-                    </Alert>
-                )}
+                <DynamicAlert
+                    status='error'
+                    message={error}
+                    showAlert={error ? true : false}
+                />
+                <DynamicAlert
+                    status='success'
+                    message='Successfully logged in'
+                    showAlert={user ? true : false}
+                />
 
                 <FormControl isRequired>
                     <VStack spacing={4} alignItems='flex-start'>

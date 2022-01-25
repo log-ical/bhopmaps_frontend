@@ -25,39 +25,27 @@ import Head from 'next/head';
 import * as React from 'react';
 import NextLink from 'next/link';
 import { formatNumber } from 'src/utils/numberFormatter';
-
 import { BsFillGridFill, BsList } from 'react-icons/bs';
 import { createDate } from 'src/utils/createDate';
-
-type Map = {
-    id: string;
-    author: string;
-    authorId: string;
-    mapName: string;
-    thumbnail: string;
-    description: string;
-    downloads: number;
-    gameType: string;
-    createdAt: Date;
-    updatedAt: Date;
-};
+import config from '../../config.json';
+import { Map } from 'src/api/types';
 
 const ListGridView: React.FC<any> = ({ data }) => {
-    const description =
-        'bhopmaps.com is a platform for CSS & CSGO bunnyhop maps.';
+    const description = config.description;
 
     const maps = data;
     const cardBackground = useColorModeValue('gray.50', 'gray.800');
     const hoverBg = useColorModeValue('gray.200', 'gray.700');
     const { colorMode, toggleColorMode } = useColorMode();
-    const [isGridView, setGriedView] = React.useState(false);
+
+    const [isListView, setView] = React.useState(true);
     const [gridButtonLabel, setGridButtonLabel] = React.useState('List View');
     const [gridButtonIcon, setGridButtonIcon] = React.useState(<BsList />);
 
     const handleGridView = () => {
-        setGriedView(!isGridView);
-        setGridButtonLabel(isGridView ? 'Grid View' : 'List View');
-        setGridButtonIcon(isGridView ? <BsFillGridFill /> : <BsList />);
+        setGridButtonLabel(isListView ? 'List View' : 'Grid View');
+        setView(!isListView);
+        setGridButtonIcon(isListView ? <BsList /> : <BsFillGridFill />);
     };
 
     // Load More Button
@@ -85,7 +73,7 @@ const ListGridView: React.FC<any> = ({ data }) => {
         setSearchByTitle(e.target.value);
     };
 
-    const searchTextPlaceholder = 'Search Maps';
+    const searchTextPlaceholder = config.searchTextPlaceHolder;
     return (
         <>
             <Head>
@@ -134,11 +122,10 @@ const ListGridView: React.FC<any> = ({ data }) => {
                     </InputLeftElement>
                 </InputGroup>
                 <Button leftIcon={gridButtonIcon} onClick={handleGridView}>
-                    {' '}
-                    {gridButtonLabel}{' '}
+                    {gridButtonLabel}
                 </Button>
             </HStack>
-            {!isGridView ? (
+            {isListView ? (
                 <List spacing={6}>
                     {maps
                         .filter((maps: any) =>

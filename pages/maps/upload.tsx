@@ -1,3 +1,4 @@
+import DynamicAlert from '@/src/components/DynamicAlert';
 import {
     FormControl,
     FormLabel,
@@ -7,12 +8,7 @@ import {
     Text,
     HStack,
     Button,
-    Alert,
-    AlertTitle,
-    AlertIcon,
     Link,
-    Spinner,
-    Select,
     RadioGroup,
     Stack,
     Radio,
@@ -177,25 +173,17 @@ const Upload = () => {
                         >
                             Submit
                         </Button>
-                        {error && (
-                            <Alert variant='subtle' status='error' rounded='md'>
-                                <AlertIcon />
-                                <AlertTitle>Error</AlertTitle>
-                                {error}
-                            </Alert>
-                        )}
 
-                        {success && (
-                            <Alert
-                                variant='subtle'
-                                status='success'
-                                rounded='md'
-                            >
-                                <AlertIcon />
-                                <AlertTitle>Success</AlertTitle>
-                                Succesfully uploaded map!
-                            </Alert>
-                        )}
+                        <DynamicAlert
+                            status='error'
+                            message={error}
+                            showAlert={error ? true : false}
+                        />
+                        <DynamicAlert
+                            status='success'
+                            message='Map uploaded'
+                            showAlert={success ? true : false}
+                        />
                     </VStack>
                 </FormControl>
             ) : (
