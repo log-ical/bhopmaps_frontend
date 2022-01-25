@@ -35,6 +35,7 @@ const Home: React.FC<any> = ({ data, users }) => {
                 <meta charSet='utf-8' />
                 <meta name='Description' content={description}></meta>
                 <title>Bhopmaps CSS & CSGO</title>
+                <script data-ad-client="ca-pub-8546214610315807" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <link
                     rel='apple-touch-icon'
                     sizes='180x180'
