@@ -19,14 +19,15 @@ import { API_URL, UserContext } from 'src/api/UserContext';
 
 const Upload = () => {
     const [mapName, setMapname] = React.useState('');
-    const [thumbnail, setThumbnail] = React.useState('');
-    const fileInput: any = React.useRef();
     const [description, setDescription] = React.useState('');
     const [error, setError] = React.useState('');
     const [gameType, setGameType] = React.useState('CSS');
     const [success, setSuccess] = React.useState(false);
     const [submitting, setSubmitting] = React.useState(false);
+    const fileInput: any = React.useRef();
     const maxFileSize = 100000000;
+    const thumbnailInput: any = React.useRef()
+    const maxThumbnailSize = 1000000;
 
     const { user } = React.useContext(UserContext);
 
@@ -52,7 +53,7 @@ const Upload = () => {
         const formData = new FormData();
         formData.append('mapName', mapName);
         formData.append('description', description);
-        formData.append('thumbnail', thumbnail);
+        formData.append('thumbnail', thumbnailInput.current.files![0]);
         formData.append('file', fileInput.current.files![0]);
         formData.append('gameType', gameType);
 
@@ -117,9 +118,10 @@ const Upload = () => {
                         <Input
                             isDisabled={submitting}
                             id='thumbnail'
-                            type='text'
-                            value={thumbnail}
-                            onChange={(e) => setThumbnail(e.target.value)}
+                            type='file'
+                            ref={thumbnailInput}
+                            variant='unstyled'
+                            accept='image/png'
                         />
 
                         <HStack justifyContent='space-between' w='full'>
