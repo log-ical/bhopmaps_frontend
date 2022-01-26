@@ -35,6 +35,7 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
     const { user } = useContext(UserContext);
     const [isloading, setLoading] = React.useState(false);
     const [error, setError] = React.useState('');
+    const [deleteButtonText, setDeleteButtonText] = React.useState('Delete Map');
 
     const renderers = {
         code: (props: any) => {
@@ -72,6 +73,11 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
         setLoading(false);
     };
 
+    const handleDeleteWarning = () => {
+        if(deleteButtonText !== 'Delete Map')   handleDelete();
+        setDeleteButtonText('Are you sure?');
+    }
+    
     const handleDelete = async () => {
         setLoading(true);
         const res = await fetch(`${API_URL}/map/${map.id}/delete`, {
@@ -172,9 +178,9 @@ const Map: React.FC<{ data: any }> = ({ data }) => {
                                     <Button
                                         isLoading={isloading}
                                         colorScheme='red'
-                                        onClick={handleDelete}
+                                        onClick={handleDeleteWarning}
                                     >
-                                        Delete Map
+                                        {deleteButtonText}
                                     </Button>
                                 ) : (
                                     <></>
